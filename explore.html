@@ -1,0 +1,1182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="static-token">
+    <title>Explore Destinations — Travora</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    
+</head>
+<body class="bg-dark-custom text-white">
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <!-- Navbar -->
+    <span data-nav-role="customer" style="display:contents">
+
+<nav class="navbar navbar-expand-lg fixed-top travora-navbar" id="mainNavbar">
+    <div class="container-fluid px-4 px-md-5">
+        <a class="navbar-brand travora-logo" href="index.html">TRAVORA</a>
+
+        <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+            <i class="fas fa-bars text-white"></i>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-end" id="navMenu">
+            <ul class="navbar-nav align-items-lg-center gap-lg-4 me-lg-4 mb-3 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link travora-link active-link" 
+                       href="explore.html">Explore</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link travora-link " 
+                       href="planner.html">Planner</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link travora-link " 
+                       href="guides.html">Guides</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link travora-link ai-planner-link " 
+                       href="ai-assistant.html">
+                        <i class="fas fa-wand-magic-sparkles"></i> AI Assistant
+                        <span class="ai-badge">NEW</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link travora-link favorites-link " 
+                       href="favorites.html">
+                        <i class="fas fa-heart me-1"></i> Favorites
+                        <span class="favorites-count " id="navFavCount">3</span>
+                    </a>
+                </li>
+            </ul>
+
+            <span data-auth="user" hidden style="display:contents">
+                
+                <div class="dropdown">
+                    <button class="btn user-menu-btn dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                        <div class="user-avatar-circle">
+                            D
+                        </div>
+                        <span class="user-name">Demo User</span>
+                        
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end user-dropdown">
+                        
+                        <li>
+                            <a class="dropdown-item" href="profile.html">
+                                <i class="fas fa-user me-2"></i> My Profile
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="favorites.html">
+                                <i class="fas fa-heart me-2"></i> My Favorites
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <form data-static="1" data-action="logout" data-method="POST">
+                                
+                                <button type="submit" class="dropdown-item text-danger">
+                                    <i class="fas fa-sign-out-alt me-2"></i> Logout
+                                </button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </span><span data-auth="guest" style="display:contents">
+                
+                <a href="login.html" class="btn nav-login-btn">Login</a>
+            </span>
+        </div>
+    </div>
+</nav></span><span data-nav-role="admin" style="display:contents" hidden>
+
+<nav class="navbar navbar-expand-lg fixed-top travora-navbar" id="mainNavbar">
+    <div class="container-fluid px-4 px-md-5">
+        <a class="navbar-brand travora-logo" href="index.html">TRAVORA</a>
+
+        <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+            <i class="fas fa-bars text-white"></i>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-end" id="navMenu">
+            <ul class="navbar-nav align-items-lg-center gap-lg-4 me-lg-4 mb-3 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link travora-link active-link" 
+                       href="explore.html">Explore</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link travora-link " 
+                       href="planner.html">Planner</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link travora-link " 
+                       href="guides.html">Guides</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link travora-link ai-planner-link " 
+                       href="ai-assistant.html">
+                        <i class="fas fa-wand-magic-sparkles"></i> AI Assistant
+                        <span class="ai-badge">NEW</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link travora-link favorites-link " 
+                       href="favorites.html">
+                        <i class="fas fa-heart me-1"></i> Favorites
+                        <span class="favorites-count " id="navFavCount">3</span>
+                    </a>
+                </li>
+            </ul>
+
+            <span data-auth="user" hidden style="display:contents">
+                
+                <div class="dropdown">
+                    <button class="btn user-menu-btn dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                        <div class="user-avatar-circle">
+                            T
+                        </div>
+                        <span class="user-name">Travora Admin</span>
+                        
+                            <span class="admin-badge">ADMIN</span>
+                        
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end user-dropdown">
+                        
+                            <li>
+                                <a class="dropdown-item" href="admin/dashboard.html">
+                                    <i class="fas fa-tachometer-alt me-2"></i> Dashboard
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="admin/users.html">
+                                    <i class="fas fa-users me-2"></i> Users
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="admin/bookings.html">
+                                    <i class="fas fa-suitcase me-2"></i> Bookings
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="admin/ai-chats.html">
+                                    <i class="fas fa-comments me-2"></i> AI Chats
+                                </a>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                        
+                        <li>
+                            <a class="dropdown-item" href="profile.html">
+                                <i class="fas fa-user me-2"></i> My Profile
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="favorites.html">
+                                <i class="fas fa-heart me-2"></i> My Favorites
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <form data-static="1" data-action="logout" data-method="POST">
+                                
+                                <button type="submit" class="dropdown-item text-danger">
+                                    <i class="fas fa-sign-out-alt me-2"></i> Logout
+                                </button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </span><span data-auth="guest" style="display:contents">
+                
+                <a href="login.html" class="btn nav-login-btn">Login</a>
+            </span>
+        </div>
+    </div>
+</nav></span>
+
+    <!-- Main Content -->
+    <main>
+        
+
+<!-- Page Header -->
+<section class="page-header position-relative overflow-hidden">
+    <div class="page-header-bg">
+        <img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?q=80&amp;w=2000&amp;auto=format&amp;fit=crop" 
+             alt="Explore Destinations" class="w-100 h-100 object-fit-cover">
+        <div class="page-header-overlay"></div>
+    </div>
+
+    <div class="container-fluid px-4 px-md-5 position-relative" style="z-index: 2;">
+        <div class="page-header-content">
+            <p class="travora-subtitle mb-3">DISCOVER THE WORLD</p>
+            <h1 class="font-syne fw-bold display-3 mb-3">Explore Destinations</h1>
+            
+                <p class="page-header-desc">Browse through our curated collection of extraordinary places. Filter by category, region, or your travel vibe.</p>
+            
+        </div>
+    </div>
+</section>
+
+<!-- Explore Content -->
+<section class="section-padding">
+    <div class="container-fluid px-4 px-md-5">
+        
+        <!-- Filter Bar -->
+        <div class="filter-bar glass-card p-4 rounded-4 mb-5">
+            <div class="row g-3 align-items-center">
+                
+                <!-- Search -->
+                <div class="col-lg-4">
+                    <div class="search-box position-relative">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" 
+                               class="form-control search-input" 
+                               id="searchInput"
+                               placeholder="Search destinations...">
+                    </div>
+                </div>
+
+                <!-- Category Filter -->
+                <div class="col-lg-5">
+                    <div class="category-filters d-flex flex-wrap gap-2" id="categoryFilters">
+                        
+                            <button class="filter-chip active" 
+                                    data-category="All">
+                                All
+                            </button>
+                        
+                            <button class="filter-chip " 
+                                    data-category="Beaches">
+                                Beaches
+                            </button>
+                        
+                            <button class="filter-chip " 
+                                    data-category="Mountains">
+                                Mountains
+                            </button>
+                        
+                            <button class="filter-chip " 
+                                    data-category="Cities">
+                                Cities
+                            </button>
+                        
+                            <button class="filter-chip " 
+                                    data-category="Deserts">
+                                Deserts
+                            </button>
+                        
+                            <button class="filter-chip " 
+                                    data-category="Forests">
+                                Forests
+                            </button>
+                        
+                            <button class="filter-chip " 
+                                    data-category="Islands">
+                                Islands
+                            </button>
+                        
+                    </div>
+                </div>
+
+                <!-- Result Count -->
+                <div class="col-lg-3 text-lg-end">
+                    <p class="result-count mb-0">
+                        <span id="resultCount">16</span> destinations found
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Destinations Grid -->
+        <div class="row g-4" id="destinationsGrid">
+            
+                <div class="col-md-6 col-lg-4 destination-item" 
+                     data-category="Beaches"
+                     data-title="amalfi coast italy mediterranean">
+                    
+
+<div class="glass-card p-3 p-md-4 rounded-4 position-relative overflow-hidden h-100 destination-card">
+    
+    <!-- Heart Button -->
+    <button class="favorite-btn active" 
+            data-id="1"
+            title="Remove from favorites">
+        <i class="fas fa-heart"></i>
+    </button>
+
+    <!-- Card Image (Clickable) -->
+    <a href="destination-1.html" class="text-decoration-none">
+        <div class="card-image-wrapper position-relative rounded-3 overflow-hidden mb-4">
+            <img src="https://images.unsplash.com/photo-1533105079780-92b9be482077?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" 
+                 alt="Amalfi Coast" 
+                 class="w-100 h-100 object-fit-cover card-image">
+            
+            <div class="badge-featured">FEATURED ESCAPE</div>
+            <div class="badge-number">01</div>
+            
+            <!-- Rating Badge -->
+            <div class="badge-rating">
+                <i class="fas fa-star"></i> 4.9
+            </div>
+        </div>
+    </a>
+    
+    <!-- Card Details -->
+    <div class="d-flex justify-content-between align-items-end">
+        <div>
+            <p class="text-accent small mb-1 letter-spacing">ITALY</p>
+            <a href="destination-1.html" class="text-decoration-none">
+                <h3 class="font-syne fw-bold h4 mb-2 card-title">Amalfi Coast</h3>
+            </a>
+            <p class="card-meta mb-0">
+                <i class="far fa-clock me-1"></i> 5 Days
+                <span class="mx-2">•</span>
+                $1,200
+            </p>
+        </div>
+        <a href="destination-1.html" class="btn arrow-btn rounded-circle">
+            <i class="fas fa-arrow-right"></i>
+        </a>
+    </div>
+    
+</div>
+                </div>
+            
+                <div class="col-md-6 col-lg-4 destination-item" 
+                     data-category="Beaches"
+                     data-title="phi phi islands thailand southeast asia">
+                    
+
+<div class="glass-card p-3 p-md-4 rounded-4 position-relative overflow-hidden h-100 destination-card">
+    
+    <!-- Heart Button -->
+    <button class="favorite-btn active" 
+            data-id="7"
+            title="Remove from favorites">
+        <i class="fas fa-heart"></i>
+    </button>
+
+    <!-- Card Image (Clickable) -->
+    <a href="destination-7.html" class="text-decoration-none">
+        <div class="card-image-wrapper position-relative rounded-3 overflow-hidden mb-4">
+            <img src="https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" 
+                 alt="Phi Phi Islands" 
+                 class="w-100 h-100 object-fit-cover card-image">
+            
+            <div class="badge-featured">FEATURED ESCAPE</div>
+            <div class="badge-number">02</div>
+            
+            <!-- Rating Badge -->
+            <div class="badge-rating">
+                <i class="fas fa-star"></i> 4.8
+            </div>
+        </div>
+    </a>
+    
+    <!-- Card Details -->
+    <div class="d-flex justify-content-between align-items-end">
+        <div>
+            <p class="text-accent small mb-1 letter-spacing">THAILAND</p>
+            <a href="destination-7.html" class="text-decoration-none">
+                <h3 class="font-syne fw-bold h4 mb-2 card-title">Phi Phi Islands</h3>
+            </a>
+            <p class="card-meta mb-0">
+                <i class="far fa-clock me-1"></i> 5 Days
+                <span class="mx-2">•</span>
+                $800
+            </p>
+        </div>
+        <a href="destination-7.html" class="btn arrow-btn rounded-circle">
+            <i class="fas fa-arrow-right"></i>
+        </a>
+    </div>
+    
+</div>
+                </div>
+            
+                <div class="col-md-6 col-lg-4 destination-item" 
+                     data-category="Mountains"
+                     data-title="northern lights iceland nordic">
+                    
+
+<div class="glass-card p-3 p-md-4 rounded-4 position-relative overflow-hidden h-100 destination-card">
+    
+    <!-- Heart Button -->
+    <button class="favorite-btn active" 
+            data-id="3"
+            title="Remove from favorites">
+        <i class="fas fa-heart"></i>
+    </button>
+
+    <!-- Card Image (Clickable) -->
+    <a href="destination-3.html" class="text-decoration-none">
+        <div class="card-image-wrapper position-relative rounded-3 overflow-hidden mb-4">
+            <img src="https://images.unsplash.com/photo-1531366936337-7c912a4589a7?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" 
+                 alt="Northern Lights" 
+                 class="w-100 h-100 object-fit-cover card-image">
+            
+            <div class="badge-featured">FEATURED ESCAPE</div>
+            <div class="badge-number">03</div>
+            
+            <!-- Rating Badge -->
+            <div class="badge-rating">
+                <i class="fas fa-star"></i> 5.0
+            </div>
+        </div>
+    </a>
+    
+    <!-- Card Details -->
+    <div class="d-flex justify-content-between align-items-end">
+        <div>
+            <p class="text-accent small mb-1 letter-spacing">ICELAND</p>
+            <a href="destination-3.html" class="text-decoration-none">
+                <h3 class="font-syne fw-bold h4 mb-2 card-title">Northern Lights</h3>
+            </a>
+            <p class="card-meta mb-0">
+                <i class="far fa-clock me-1"></i> 6 Days
+                <span class="mx-2">•</span>
+                $2,400
+            </p>
+        </div>
+        <a href="destination-3.html" class="btn arrow-btn rounded-circle">
+            <i class="fas fa-arrow-right"></i>
+        </a>
+    </div>
+    
+</div>
+                </div>
+            
+                <div class="col-md-6 col-lg-4 destination-item" 
+                     data-category="Mountains"
+                     data-title="alpine peaks switzerland europe">
+                    
+
+<div class="glass-card p-3 p-md-4 rounded-4 position-relative overflow-hidden h-100 destination-card">
+    
+    <!-- Heart Button -->
+    <button class="favorite-btn " 
+            data-id="6"
+            title="Add to favorites">
+        <i class="far fa-heart"></i>
+    </button>
+
+    <!-- Card Image (Clickable) -->
+    <a href="destination-6.html" class="text-decoration-none">
+        <div class="card-image-wrapper position-relative rounded-3 overflow-hidden mb-4">
+            <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" 
+                 alt="Alpine Peaks" 
+                 class="w-100 h-100 object-fit-cover card-image">
+            
+            <div class="badge-featured">FEATURED ESCAPE</div>
+            <div class="badge-number">04</div>
+            
+            <!-- Rating Badge -->
+            <div class="badge-rating">
+                <i class="fas fa-star"></i> 4.9
+            </div>
+        </div>
+    </a>
+    
+    <!-- Card Details -->
+    <div class="d-flex justify-content-between align-items-end">
+        <div>
+            <p class="text-accent small mb-1 letter-spacing">SWITZERLAND</p>
+            <a href="destination-6.html" class="text-decoration-none">
+                <h3 class="font-syne fw-bold h4 mb-2 card-title">Alpine Peaks</h3>
+            </a>
+            <p class="card-meta mb-0">
+                <i class="far fa-clock me-1"></i> 6 Days
+                <span class="mx-2">•</span>
+                $1,650
+            </p>
+        </div>
+        <a href="destination-6.html" class="btn arrow-btn rounded-circle">
+            <i class="fas fa-arrow-right"></i>
+        </a>
+    </div>
+    
+</div>
+                </div>
+            
+                <div class="col-md-6 col-lg-4 destination-item" 
+                     data-category="Mountains"
+                     data-title="machu picchu peru south america">
+                    
+
+<div class="glass-card p-3 p-md-4 rounded-4 position-relative overflow-hidden h-100 destination-card">
+    
+    <!-- Heart Button -->
+    <button class="favorite-btn " 
+            data-id="8"
+            title="Add to favorites">
+        <i class="far fa-heart"></i>
+    </button>
+
+    <!-- Card Image (Clickable) -->
+    <a href="destination-8.html" class="text-decoration-none">
+        <div class="card-image-wrapper position-relative rounded-3 overflow-hidden mb-4">
+            <img src="https://images.unsplash.com/photo-1526392060635-9d6019884377?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" 
+                 alt="Machu Picchu" 
+                 class="w-100 h-100 object-fit-cover card-image">
+            
+            <div class="badge-featured">FEATURED ESCAPE</div>
+            <div class="badge-number">05</div>
+            
+            <!-- Rating Badge -->
+            <div class="badge-rating">
+                <i class="fas fa-star"></i> 4.9
+            </div>
+        </div>
+    </a>
+    
+    <!-- Card Details -->
+    <div class="d-flex justify-content-between align-items-end">
+        <div>
+            <p class="text-accent small mb-1 letter-spacing">PERU</p>
+            <a href="destination-8.html" class="text-decoration-none">
+                <h3 class="font-syne fw-bold h4 mb-2 card-title">Machu Picchu</h3>
+            </a>
+            <p class="card-meta mb-0">
+                <i class="far fa-clock me-1"></i> 8 Days
+                <span class="mx-2">•</span>
+                $1,400
+            </p>
+        </div>
+        <a href="destination-8.html" class="btn arrow-btn rounded-circle">
+            <i class="fas fa-arrow-right"></i>
+        </a>
+    </div>
+    
+</div>
+                </div>
+            
+                <div class="col-md-6 col-lg-4 destination-item" 
+                     data-category="Cities"
+                     data-title="tokyo lights japan asia">
+                    
+
+<div class="glass-card p-3 p-md-4 rounded-4 position-relative overflow-hidden h-100 destination-card">
+    
+    <!-- Heart Button -->
+    <button class="favorite-btn " 
+            data-id="10"
+            title="Add to favorites">
+        <i class="far fa-heart"></i>
+    </button>
+
+    <!-- Card Image (Clickable) -->
+    <a href="destination-10.html" class="text-decoration-none">
+        <div class="card-image-wrapper position-relative rounded-3 overflow-hidden mb-4">
+            <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" 
+                 alt="Tokyo Lights" 
+                 class="w-100 h-100 object-fit-cover card-image">
+            
+            <div class="badge-featured">FEATURED ESCAPE</div>
+            <div class="badge-number">06</div>
+            
+            <!-- Rating Badge -->
+            <div class="badge-rating">
+                <i class="fas fa-star"></i> 4.9
+            </div>
+        </div>
+    </a>
+    
+    <!-- Card Details -->
+    <div class="d-flex justify-content-between align-items-end">
+        <div>
+            <p class="text-accent small mb-1 letter-spacing">JAPAN</p>
+            <a href="destination-10.html" class="text-decoration-none">
+                <h3 class="font-syne fw-bold h4 mb-2 card-title">Tokyo Lights</h3>
+            </a>
+            <p class="card-meta mb-0">
+                <i class="far fa-clock me-1"></i> 6 Days
+                <span class="mx-2">•</span>
+                $1,900
+            </p>
+        </div>
+        <a href="destination-10.html" class="btn arrow-btn rounded-circle">
+            <i class="fas fa-arrow-right"></i>
+        </a>
+    </div>
+    
+</div>
+                </div>
+            
+                <div class="col-md-6 col-lg-4 destination-item" 
+                     data-category="Cities"
+                     data-title="dubai skyline uae middle east">
+                    
+
+<div class="glass-card p-3 p-md-4 rounded-4 position-relative overflow-hidden h-100 destination-card">
+    
+    <!-- Heart Button -->
+    <button class="favorite-btn " 
+            data-id="11"
+            title="Add to favorites">
+        <i class="far fa-heart"></i>
+    </button>
+
+    <!-- Card Image (Clickable) -->
+    <a href="destination-11.html" class="text-decoration-none">
+        <div class="card-image-wrapper position-relative rounded-3 overflow-hidden mb-4">
+            <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" 
+                 alt="Dubai Skyline" 
+                 class="w-100 h-100 object-fit-cover card-image">
+            
+            <div class="badge-featured">FEATURED ESCAPE</div>
+            <div class="badge-number">07</div>
+            
+            <!-- Rating Badge -->
+            <div class="badge-rating">
+                <i class="fas fa-star"></i> 4.7
+            </div>
+        </div>
+    </a>
+    
+    <!-- Card Details -->
+    <div class="d-flex justify-content-between align-items-end">
+        <div>
+            <p class="text-accent small mb-1 letter-spacing">UAE</p>
+            <a href="destination-11.html" class="text-decoration-none">
+                <h3 class="font-syne fw-bold h4 mb-2 card-title">Dubai Skyline</h3>
+            </a>
+            <p class="card-meta mb-0">
+                <i class="far fa-clock me-1"></i> 4 Days
+                <span class="mx-2">•</span>
+                $1,500
+            </p>
+        </div>
+        <a href="destination-11.html" class="btn arrow-btn rounded-circle">
+            <i class="fas fa-arrow-right"></i>
+        </a>
+    </div>
+    
+</div>
+                </div>
+            
+                <div class="col-md-6 col-lg-4 destination-item" 
+                     data-category="Cities"
+                     data-title="paris romance france europe">
+                    
+
+<div class="glass-card p-3 p-md-4 rounded-4 position-relative overflow-hidden h-100 destination-card">
+    
+    <!-- Heart Button -->
+    <button class="favorite-btn " 
+            data-id="12"
+            title="Add to favorites">
+        <i class="far fa-heart"></i>
+    </button>
+
+    <!-- Card Image (Clickable) -->
+    <a href="destination-12.html" class="text-decoration-none">
+        <div class="card-image-wrapper position-relative rounded-3 overflow-hidden mb-4">
+            <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" 
+                 alt="Paris Romance" 
+                 class="w-100 h-100 object-fit-cover card-image">
+            
+            <div class="badge-featured">FEATURED ESCAPE</div>
+            <div class="badge-number">08</div>
+            
+            <!-- Rating Badge -->
+            <div class="badge-rating">
+                <i class="fas fa-star"></i> 4.9
+            </div>
+        </div>
+    </a>
+    
+    <!-- Card Details -->
+    <div class="d-flex justify-content-between align-items-end">
+        <div>
+            <p class="text-accent small mb-1 letter-spacing">FRANCE</p>
+            <a href="destination-12.html" class="text-decoration-none">
+                <h3 class="font-syne fw-bold h4 mb-2 card-title">Paris Romance</h3>
+            </a>
+            <p class="card-meta mb-0">
+                <i class="far fa-clock me-1"></i> 5 Days
+                <span class="mx-2">•</span>
+                $2,100
+            </p>
+        </div>
+        <a href="destination-12.html" class="btn arrow-btn rounded-circle">
+            <i class="fas fa-arrow-right"></i>
+        </a>
+    </div>
+    
+</div>
+                </div>
+            
+                <div class="col-md-6 col-lg-4 destination-item" 
+                     data-category="Cities"
+                     data-title="new york nights usa north america">
+                    
+
+<div class="glass-card p-3 p-md-4 rounded-4 position-relative overflow-hidden h-100 destination-card">
+    
+    <!-- Heart Button -->
+    <button class="favorite-btn " 
+            data-id="13"
+            title="Add to favorites">
+        <i class="far fa-heart"></i>
+    </button>
+
+    <!-- Card Image (Clickable) -->
+    <a href="destination-13.html" class="text-decoration-none">
+        <div class="card-image-wrapper position-relative rounded-3 overflow-hidden mb-4">
+            <img src="https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" 
+                 alt="New York Nights" 
+                 class="w-100 h-100 object-fit-cover card-image">
+            
+            <div class="badge-featured">FEATURED ESCAPE</div>
+            <div class="badge-number">09</div>
+            
+            <!-- Rating Badge -->
+            <div class="badge-rating">
+                <i class="fas fa-star"></i> 4.8
+            </div>
+        </div>
+    </a>
+    
+    <!-- Card Details -->
+    <div class="d-flex justify-content-between align-items-end">
+        <div>
+            <p class="text-accent small mb-1 letter-spacing">USA</p>
+            <a href="destination-13.html" class="text-decoration-none">
+                <h3 class="font-syne fw-bold h4 mb-2 card-title">New York Nights</h3>
+            </a>
+            <p class="card-meta mb-0">
+                <i class="far fa-clock me-1"></i> 5 Days
+                <span class="mx-2">•</span>
+                $2,300
+            </p>
+        </div>
+        <a href="destination-13.html" class="btn arrow-btn rounded-circle">
+            <i class="fas fa-arrow-right"></i>
+        </a>
+    </div>
+    
+</div>
+                </div>
+            
+                <div class="col-md-6 col-lg-4 destination-item" 
+                     data-category="Deserts"
+                     data-title="sahara dunes morocco africa">
+                    
+
+<div class="glass-card p-3 p-md-4 rounded-4 position-relative overflow-hidden h-100 destination-card">
+    
+    <!-- Heart Button -->
+    <button class="favorite-btn " 
+            data-id="4"
+            title="Add to favorites">
+        <i class="far fa-heart"></i>
+    </button>
+
+    <!-- Card Image (Clickable) -->
+    <a href="destination-4.html" class="text-decoration-none">
+        <div class="card-image-wrapper position-relative rounded-3 overflow-hidden mb-4">
+            <img src="https://images.unsplash.com/photo-1509316785289-025f5b846b35?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" 
+                 alt="Sahara Dunes" 
+                 class="w-100 h-100 object-fit-cover card-image">
+            
+            <div class="badge-featured">FEATURED ESCAPE</div>
+            <div class="badge-number">10</div>
+            
+            <!-- Rating Badge -->
+            <div class="badge-rating">
+                <i class="fas fa-star"></i> 4.7
+            </div>
+        </div>
+    </a>
+    
+    <!-- Card Details -->
+    <div class="d-flex justify-content-between align-items-end">
+        <div>
+            <p class="text-accent small mb-1 letter-spacing">MOROCCO</p>
+            <a href="destination-4.html" class="text-decoration-none">
+                <h3 class="font-syne fw-bold h4 mb-2 card-title">Sahara Dunes</h3>
+            </a>
+            <p class="card-meta mb-0">
+                <i class="far fa-clock me-1"></i> 4 Days
+                <span class="mx-2">•</span>
+                $950
+            </p>
+        </div>
+        <a href="destination-4.html" class="btn arrow-btn rounded-circle">
+            <i class="fas fa-arrow-right"></i>
+        </a>
+    </div>
+    
+</div>
+                </div>
+            
+                <div class="col-md-6 col-lg-4 destination-item" 
+                     data-category="Deserts"
+                     data-title="white desert egypt north africa">
+                    
+
+<div class="glass-card p-3 p-md-4 rounded-4 position-relative overflow-hidden h-100 destination-card">
+    
+    <!-- Heart Button -->
+    <button class="favorite-btn " 
+            data-id="14"
+            title="Add to favorites">
+        <i class="far fa-heart"></i>
+    </button>
+
+    <!-- Card Image (Clickable) -->
+    <a href="destination-14.html" class="text-decoration-none">
+        <div class="card-image-wrapper position-relative rounded-3 overflow-hidden mb-4">
+            <img src="https://images.unsplash.com/photo-1547234935-80c7145ec969?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" 
+                 alt="White Desert" 
+                 class="w-100 h-100 object-fit-cover card-image">
+            
+            <div class="badge-featured">FEATURED ESCAPE</div>
+            <div class="badge-number">11</div>
+            
+            <!-- Rating Badge -->
+            <div class="badge-rating">
+                <i class="fas fa-star"></i> 4.8
+            </div>
+        </div>
+    </a>
+    
+    <!-- Card Details -->
+    <div class="d-flex justify-content-between align-items-end">
+        <div>
+            <p class="text-accent small mb-1 letter-spacing">EGYPT</p>
+            <a href="destination-14.html" class="text-decoration-none">
+                <h3 class="font-syne fw-bold h4 mb-2 card-title">White Desert</h3>
+            </a>
+            <p class="card-meta mb-0">
+                <i class="far fa-clock me-1"></i> 5 Days
+                <span class="mx-2">•</span>
+                $1,100
+            </p>
+        </div>
+        <a href="destination-14.html" class="btn arrow-btn rounded-circle">
+            <i class="fas fa-arrow-right"></i>
+        </a>
+    </div>
+    
+</div>
+                </div>
+            
+                <div class="col-md-6 col-lg-4 destination-item" 
+                     data-category="Forests"
+                     data-title="kyoto gardens japan asia">
+                    
+
+<div class="glass-card p-3 p-md-4 rounded-4 position-relative overflow-hidden h-100 destination-card">
+    
+    <!-- Heart Button -->
+    <button class="favorite-btn " 
+            data-id="2"
+            title="Add to favorites">
+        <i class="far fa-heart"></i>
+    </button>
+
+    <!-- Card Image (Clickable) -->
+    <a href="destination-2.html" class="text-decoration-none">
+        <div class="card-image-wrapper position-relative rounded-3 overflow-hidden mb-4">
+            <img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" 
+                 alt="Kyoto Gardens" 
+                 class="w-100 h-100 object-fit-cover card-image">
+            
+            <div class="badge-featured">FEATURED ESCAPE</div>
+            <div class="badge-number">12</div>
+            
+            <!-- Rating Badge -->
+            <div class="badge-rating">
+                <i class="fas fa-star"></i> 4.8
+            </div>
+        </div>
+    </a>
+    
+    <!-- Card Details -->
+    <div class="d-flex justify-content-between align-items-end">
+        <div>
+            <p class="text-accent small mb-1 letter-spacing">JAPAN</p>
+            <a href="destination-2.html" class="text-decoration-none">
+                <h3 class="font-syne fw-bold h4 mb-2 card-title">Kyoto Gardens</h3>
+            </a>
+            <p class="card-meta mb-0">
+                <i class="far fa-clock me-1"></i> 7 Days
+                <span class="mx-2">•</span>
+                $1,800
+            </p>
+        </div>
+        <a href="destination-2.html" class="btn arrow-btn rounded-circle">
+            <i class="fas fa-arrow-right"></i>
+        </a>
+    </div>
+    
+</div>
+                </div>
+            
+                <div class="col-md-6 col-lg-4 destination-item" 
+                     data-category="Forests"
+                     data-title="fjord lands norway nordic">
+                    
+
+<div class="glass-card p-3 p-md-4 rounded-4 position-relative overflow-hidden h-100 destination-card">
+    
+    <!-- Heart Button -->
+    <button class="favorite-btn " 
+            data-id="9"
+            title="Add to favorites">
+        <i class="far fa-heart"></i>
+    </button>
+
+    <!-- Card Image (Clickable) -->
+    <a href="destination-9.html" class="text-decoration-none">
+        <div class="card-image-wrapper position-relative rounded-3 overflow-hidden mb-4">
+            <img src="https://images.unsplash.com/photo-1601439678777-b2b3c56fa627?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" 
+                 alt="Fjord Lands" 
+                 class="w-100 h-100 object-fit-cover card-image">
+            
+            <div class="badge-featured">FEATURED ESCAPE</div>
+            <div class="badge-number">13</div>
+            
+            <!-- Rating Badge -->
+            <div class="badge-rating">
+                <i class="fas fa-star"></i> 5.0
+            </div>
+        </div>
+    </a>
+    
+    <!-- Card Details -->
+    <div class="d-flex justify-content-between align-items-end">
+        <div>
+            <p class="text-accent small mb-1 letter-spacing">NORWAY</p>
+            <a href="destination-9.html" class="text-decoration-none">
+                <h3 class="font-syne fw-bold h4 mb-2 card-title">Fjord Lands</h3>
+            </a>
+            <p class="card-meta mb-0">
+                <i class="far fa-clock me-1"></i> 7 Days
+                <span class="mx-2">•</span>
+                $2,200
+            </p>
+        </div>
+        <a href="destination-9.html" class="btn arrow-btn rounded-circle">
+            <i class="fas fa-arrow-right"></i>
+        </a>
+    </div>
+    
+</div>
+                </div>
+            
+                <div class="col-md-6 col-lg-4 destination-item" 
+                     data-category="Islands"
+                     data-title="coral atolls maldives indian ocean">
+                    
+
+<div class="glass-card p-3 p-md-4 rounded-4 position-relative overflow-hidden h-100 destination-card">
+    
+    <!-- Heart Button -->
+    <button class="favorite-btn " 
+            data-id="5"
+            title="Add to favorites">
+        <i class="far fa-heart"></i>
+    </button>
+
+    <!-- Card Image (Clickable) -->
+    <a href="destination-5.html" class="text-decoration-none">
+        <div class="card-image-wrapper position-relative rounded-3 overflow-hidden mb-4">
+            <img src="https://images.unsplash.com/photo-1559128010-7c1ad6e1b6a5?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" 
+                 alt="Coral Atolls" 
+                 class="w-100 h-100 object-fit-cover card-image">
+            
+            <div class="badge-featured">FEATURED ESCAPE</div>
+            <div class="badge-number">14</div>
+            
+            <!-- Rating Badge -->
+            <div class="badge-rating">
+                <i class="fas fa-star"></i> 4.9
+            </div>
+        </div>
+    </a>
+    
+    <!-- Card Details -->
+    <div class="d-flex justify-content-between align-items-end">
+        <div>
+            <p class="text-accent small mb-1 letter-spacing">MALDIVES</p>
+            <a href="destination-5.html" class="text-decoration-none">
+                <h3 class="font-syne fw-bold h4 mb-2 card-title">Coral Atolls</h3>
+            </a>
+            <p class="card-meta mb-0">
+                <i class="far fa-clock me-1"></i> 5 Days
+                <span class="mx-2">•</span>
+                $2,100
+            </p>
+        </div>
+        <a href="destination-5.html" class="btn arrow-btn rounded-circle">
+            <i class="fas fa-arrow-right"></i>
+        </a>
+    </div>
+    
+</div>
+                </div>
+            
+                <div class="col-md-6 col-lg-4 destination-item" 
+                     data-category="Islands"
+                     data-title="santorini greece mediterranean">
+                    
+
+<div class="glass-card p-3 p-md-4 rounded-4 position-relative overflow-hidden h-100 destination-card">
+    
+    <!-- Heart Button -->
+    <button class="favorite-btn " 
+            data-id="15"
+            title="Add to favorites">
+        <i class="far fa-heart"></i>
+    </button>
+
+    <!-- Card Image (Clickable) -->
+    <a href="destination-15.html" class="text-decoration-none">
+        <div class="card-image-wrapper position-relative rounded-3 overflow-hidden mb-4">
+            <img src="https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" 
+                 alt="Santorini" 
+                 class="w-100 h-100 object-fit-cover card-image">
+            
+            <div class="badge-featured">FEATURED ESCAPE</div>
+            <div class="badge-number">15</div>
+            
+            <!-- Rating Badge -->
+            <div class="badge-rating">
+                <i class="fas fa-star"></i> 4.9
+            </div>
+        </div>
+    </a>
+    
+    <!-- Card Details -->
+    <div class="d-flex justify-content-between align-items-end">
+        <div>
+            <p class="text-accent small mb-1 letter-spacing">GREECE</p>
+            <a href="destination-15.html" class="text-decoration-none">
+                <h3 class="font-syne fw-bold h4 mb-2 card-title">Santorini</h3>
+            </a>
+            <p class="card-meta mb-0">
+                <i class="far fa-clock me-1"></i> 5 Days
+                <span class="mx-2">•</span>
+                $1,750
+            </p>
+        </div>
+        <a href="destination-15.html" class="btn arrow-btn rounded-circle">
+            <i class="fas fa-arrow-right"></i>
+        </a>
+    </div>
+    
+</div>
+                </div>
+            
+                <div class="col-md-6 col-lg-4 destination-item" 
+                     data-category="Islands"
+                     data-title="bali paradise indonesia southeast asia">
+                    
+
+<div class="glass-card p-3 p-md-4 rounded-4 position-relative overflow-hidden h-100 destination-card">
+    
+    <!-- Heart Button -->
+    <button class="favorite-btn " 
+            data-id="16"
+            title="Add to favorites">
+        <i class="far fa-heart"></i>
+    </button>
+
+    <!-- Card Image (Clickable) -->
+    <a href="destination-16.html" class="text-decoration-none">
+        <div class="card-image-wrapper position-relative rounded-3 overflow-hidden mb-4">
+            <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" 
+                 alt="Bali Paradise" 
+                 class="w-100 h-100 object-fit-cover card-image">
+            
+            <div class="badge-featured">FEATURED ESCAPE</div>
+            <div class="badge-number">16</div>
+            
+            <!-- Rating Badge -->
+            <div class="badge-rating">
+                <i class="fas fa-star"></i> 4.9
+            </div>
+        </div>
+    </a>
+    
+    <!-- Card Details -->
+    <div class="d-flex justify-content-between align-items-end">
+        <div>
+            <p class="text-accent small mb-1 letter-spacing">INDONESIA</p>
+            <a href="destination-16.html" class="text-decoration-none">
+                <h3 class="font-syne fw-bold h4 mb-2 card-title">Bali Paradise</h3>
+            </a>
+            <p class="card-meta mb-0">
+                <i class="far fa-clock me-1"></i> 7 Days
+                <span class="mx-2">•</span>
+                $900
+            </p>
+        </div>
+        <a href="destination-16.html" class="btn arrow-btn rounded-circle">
+            <i class="fas fa-arrow-right"></i>
+        </a>
+    </div>
+    
+</div>
+                </div>
+            
+        </div>
+
+        <!-- No Results Message -->
+        <div class="no-results text-center py-5 d-none" id="noResults">
+            <i class="fas fa-compass fa-3x mb-3" style="color: rgba(64, 224, 208, 0.3);"></i>
+            <h3 class="font-syne fw-bold mb-2">No destinations found</h3>
+            <p class="text-white-50">Try adjusting your filters or search terms.</p>
+        </div>
+
+    </div>
+</section>
+
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="travora-footer py-5 mt-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <h5 class="travora-logo mb-2">TRAVORA</h5>
+                <p class="text-muted small mb-0">Your next journey starts here.</p>
+            </div>
+            <div class="col-md-6 text-md-end mt-3 mt-md-0">
+                <p class="text-muted small mb-0">© 2026 Travora — Edition</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="js/travora-data.js"></script>
+    <script src="js/travora-static.js"></script>
+    <script src="js/main.js"></script>
+    
+    
+</body>
+</html>

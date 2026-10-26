@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="static-token">
+    <title>Bookings — Admin</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    
+    
+<style>
+/* Status Dropdown Button */
+.status-dropdown-btn {
+    background: rgba(64, 224, 208, 0.08);
+    border: 1px solid rgba(64, 224, 208, 0.25);
+    color: #40E0D0;
+    padding: 0.4rem 0.9rem;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+.status-dropdown-btn:hover {
+    background: rgba(64, 224, 208, 0.15);
+    border-color: #40E0D0;
+    color: #40E0D0;
+}
+.status-dropdown-btn::after {
+    margin-left: 0.4rem;
+    vertical-align: middle;
+}
+
+/* Status Dropdown Menu */
+.status-dropdown-menu {
+    background: rgba(7, 19, 24, 0.98);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 0.4rem;
+    min-width: 180px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+}
+.status-dropdown-menu .dropdown-item {
+    color: rgba(255, 255, 255, 0.85);
+    padding: 0.55rem 0.9rem;
+    border-radius: 7px;
+    font-size: 0.85rem;
+    transition: all 0.2s ease;
+}
+.status-dropdown-menu .dropdown-item:hover {
+    background: rgba(64, 224, 208, 0.1);
+    color: #ffffff;
+}
+
+/* Disable current status */
+.status-dropdown-menu .dropdown-item.disabled {
+    opacity: 0.35;
+    pointer-events: none;
+}
+
+/* Row fade-in animation on status change */
+@keyframes statusFlash {
+    0% { background: rgba(64, 224, 208, 0.25); }
+    100% { background: transparent; }
+}
+.status-flash {
+    animation: statusFlash 1.2s ease;
+}
+</style>
+
+</head>
+<body class="bg-dark-custom text-white">
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <!-- Navbar -->
+    <span data-nav-role="customer" style="display:contents">
+
+<nav class="navbar navbar-expand-lg fixed-top travora-navbar" id="mainNavbar">
+    <div class="container-fluid px-4 px-md-5">
+        <a class="navbar-brand travora-logo" href="../index.html">TRAVORA</a>
+
+        <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+            <i class="fas fa-bars text-white"></i>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-end" id="navMenu">
+            <ul class="navbar-nav align-items-lg-center gap-lg-4 me-lg-4 mb-3 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link travora-link " 
+                       href="../explore.html">Explore</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link travora-link " 
+                       href="../planner.html">Planner</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link travora-link " 
+                       href="../guides.html">Guides</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link travora-link ai-planner-link " 
+                       href="../ai-assistant.html">
+                        <i class="fas fa-wand-magic-sparkles"></i> AI Assistant
+                        <span class="ai-badge">NEW</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link travora-link favorites-link " 
+                       href="../favorites.html">
+                        <i class="fas fa-heart me-1"></i> Favorites
+                        <span class="favorites-count " id="navFavCount">3</span>
+                    </a>
+                </li>
+            </ul>
+
+            <span data-auth="user" hidden style="display:contents">
+                
+                <div class="dropdown">
+                    <button class="btn user-menu-btn dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                        <div class="user-avatar-circle">
+                            D
+                        </div>
+                        <span class="user-name">Demo User</span>
+                        
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end user-dropdown">
+                        
+                        <li>
+                            <a class="dropdown-item" href="../profile.html">
+                                <i class="fas fa-user me-2"></i> My Profile
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="../favorites.html">
+                                <i class="fas fa-heart me-2"></i> My Favorites
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <form data-static="1" data-action="logout" data-method="POST">
+                                
+                                <button type="submit" class="dropdown-item text-danger">
+                                    <i class="fas fa-sign-out-alt me-2"></i> Logout
+                                </button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </span><span data-auth="guest" style="display:contents">
+                
+                <a href="../login.html" class="btn nav-login-btn">Login</a>
+            </span>
+        </div>
+    </div>
+</nav></span><span data-nav-role="admin" style="display:contents" hidden>
+
+<nav class="navbar navbar-expand-lg fixed-top travora-navbar" id="mainNavbar">
+    <div class="container-fluid px-4 px-md-5">
+        <a class="navbar-brand travora-logo" href="../index.html">TRAVORA</a>
+
+        <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+            <i class="fas fa-bars text-white"></i>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-end" id="navMenu">
+            <ul class="navbar-nav align-items-lg-center gap-lg-4 me-lg-4 mb-3 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link travora-link " 
+                       href="../explore.html">Explore</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link travora-link " 
+                       href="../planner.html">Planner</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link travora-link " 
+                       href="../guides.html">Guides</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link travora-link ai-planner-link " 
+                       href="../ai-assistant.html">
+                        <i class="fas fa-wand-magic-sparkles"></i> AI Assistant
+                        <span class="ai-badge">NEW</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link travora-link favorites-link " 
+                       href="../favorites.html">
+                        <i class="fas fa-heart me-1"></i> Favorites
+                        <span class="favorites-count " id="navFavCount">3</span>
+                    </a>
+                </li>
+            </ul>
+
+            <span data-auth="user" hidden style="display:contents">
+                
+                <div class="dropdown">
+                    <button class="btn user-menu-btn dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                        <div class="user-avatar-circle">
+                            T
+                        </div>
+                        <span class="user-name">Travora Admin</span>
+                        
+                            <span class="admin-badge">ADMIN</span>
+                        
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end user-dropdown">
+                        
+                            <li>
+                                <a class="dropdown-item" href="../admin/dashboard.html">
+                                    <i class="fas fa-tachometer-alt me-2"></i> Dashboard
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="../admin/users.html">
+                                    <i class="fas fa-users me-2"></i> Users
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="../admin/bookings.html">
+                                    <i class="fas fa-suitcase me-2"></i> Bookings
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="../admin/ai-chats.html">
+                                    <i class="fas fa-comments me-2"></i> AI Chats
+                                </a>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                        
+                        <li>
+                            <a class="dropdown-item" href="../profile.html">
+                                <i class="fas fa-user me-2"></i> My Profile
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="../favorites.html">
+                                <i class="fas fa-heart me-2"></i> My Favorites
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <form data-static="1" data-action="logout" data-method="POST">
+                                
+                                <button type="submit" class="dropdown-item text-danger">
+                                    <i class="fas fa-sign-out-alt me-2"></i> Logout
+                                </button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </span><span data-auth="guest" style="display:contents">
+                
+                <a href="../login.html" class="btn nav-login-btn">Login</a>
+            </span>
+        </div>
+    </div>
+</nav></span>
+
+    <!-- Main Content -->
+    <main>
+        
+
+<section class="admin-section">
+    <div class="container-fluid px-4 px-md-5">
+
+        <div class="admin-header mb-5">
+            <div>
+                <p class="travora-subtitle mb-2">ADMIN CONTROL</p>
+                <h1 class="font-syne fw-bold display-4 mb-2">Bookings</h1>
+                <p class="text-white-50 mb-0">All bookings made on Travora — manage status below</p>
+            </div>
+            <a href="../admin/dashboard.html" class="btn travora-btn-outline">
+                <i class="fas fa-arrow-left me-2"></i> Back to Dashboard
+            </a>
+        </div>
+
+        
+
+        <!-- Filter Chips -->
+        <div class="d-flex flex-wrap gap-2 mb-4" id="bookingStatusFilter">
+            <button class="filter-chip active" data-status="all">All</button>
+            <button class="filter-chip" data-status="pending">Pending</button>
+            <button class="filter-chip" data-status="confirmed">Confirmed</button>
+            <button class="filter-chip" data-status="cancelled">Cancelled</button>
+        </div>
+
+        <div class="glass-card rounded-4 p-4">
+            <div class="table-responsive">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Reference</th>
+                            <th>Destination</th>
+                            <th>Customer</th>
+                            <th>Travel Date</th>
+                            <th>Travelers</th>
+                            <th>Total</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                            <tr data-booking-status="pending" data-booking-id="12">
+                                <td>
+                                    <span class="text-accent fw-bold small">TRV-3C4D5E6F</span>
+                                </td>
+                                <td>
+                                    <p class="mb-0 fw-semibold">Santorini</p>
+                                    <p class="mb-0 small text-white-50">GREECE</p>
+                                </td>
+                                <td>
+                                    <p class="mb-0 small">Emily Johnson</p>
+                                    <p class="mb-0 small text-white-50">emily@example.com</p>
+                                </td>
+                                <td class="small">Dec 12, 2026</td>
+                                <td class="small text-center">4</td>
+                                <td class="text-accent fw-bold">$7,000</td>
+                                <td>
+                                    <span class="status-badge status-pending" data-status-badge>
+                                        Pending
+                                    </span>
+                                </td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button class="btn status-dropdown-btn dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                            <i class="fas fa-cog me-1"></i> Change
+                                        </button>
+                                        <ul class="dropdown-menu status-dropdown-menu">
+                                            <li>
+                                                <button class="dropdown-item status-action" data-status="pending" data-id="12">
+                                                    <i class="fas fa-clock text-warning me-2"></i> Pending
+                                                </button>
+                                            </li>
+                                            <li>
+                                                <button class="dropdown-item status-action" data-status="confirmed" data-id="12">
+                                                    <i class="fas fa-check-circle text-accent me-2"></i> Confirmed
+                                                </button>
+                                            </li>
+                                            <li>
+                                                <button class="dropdown-item status-action" data-status="cancelled" data-id="12">
+                                                    <i class="fas fa-times-circle text-danger me-2"></i> Cancelled
+                                                </button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        
+                            <tr data-booking-status="pending" data-booking-id="3">
+                                <td>
+                                    <span class="text-accent fw-bold small">TRV-C9D0E1F2</span>
+                                </td>
+                                <td>
+                                    <p class="mb-0 fw-semibold">Phi Phi Islands</p>
+                                    <p class="mb-0 small text-white-50">THAILAND</p>
+                                </td>
+                                <td>
+                                    <p class="mb-0 small">Demo User</p>
+                                    <p class="mb-0 small text-white-50">user@travora.com</p>
+                                </td>
+                                <td class="small">Feb 08, 2027</td>
+                                <td class="small text-center">4</td>
+                                <td class="text-accent fw-bold">$3,200</td>
+                                <td>
+                                    <span class="status-badge status-pending" data-status-badge>
+                                        Pending
+                                    </span>
+                                </td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button class="btn status-dropdown-btn dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                            <i class="fas fa-cog me-1"></i> Change
+                                        </button>
+                                        <ul class="dropdown-menu status-dropdown-menu">
+                                            <li>
+                                                <button class="dropdown-item status-action" data-status="pending" data-id="3">
+                                                    <i class="fas fa-clock text-warning me-2"></i> Pending
+                                                </button>
+                                            </li>
+                                            <li>
+                                                <button class="dropdown-item status-action" data-status="confirmed" data-id="3">
+                                                    <i class="fas fa-check-circle text-accent me-2"></i> Confirmed
+                                                </button>
+                                            </li>
+                                            <li>
+                                                <button class="dropdown-item status-action" data-status="cancelled" data-id="3">
+                                                    <i class="fas fa-times-circle text-danger me-2"></i> Cancelled
+                                                </button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        
+                            <tr data-booking-status="pending" data-booking-id="10">
+                                <td>
+                                    <span class="text-accent fw-bold small">TRV-5A6B7C8D</span>
+                                </td>
+                                <td>
+                                    <p class="mb-0 fw-semibold">Tokyo Lights</p>
+                                    <p class="mb-0 small text-white-50">JAPAN</p>
+                                </td>
+                                <td>
+                                    <p class="mb-0 small">Lena Fischer</p>
+                                    <p class="mb-0 small text-white-50">lena@example.com</p>
+                                </td>
+                                <td class="small">Dec 30, 2026</td>
+                                <td class="small text-center">2</td>
+                                <td class="text-accent fw-bold">$3,800</td>
+                                <td>
+                                    <span class="status-badge status-pending" data-status-badge>
+                                        Pending
+                                    </span>
+                                </td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button class="btn status-dropdown-btn dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                            <i class="fas fa-cog me-1"></i> Change
+                                        </button>
+                                        <ul class="dropdown-menu status-dropdown-menu">
+                                            <li>
+                                                <button class="dropdown-item status-action" data-status="pending" data-id="10">
+                                                    <i class="fas fa-clock text-warning me-2"></i> Pending
+                                                </button>
+                                            </li>
+                                            <li>
+                                                <button class="dropdown-item status-action" data-status="confirmed" data-id="10">
+                                                    <i class="fas fa-check-circle text-accent me-2"></i> Confirmed
+                                                </button>
+                                            </li>
+                                            <li>
+                                                <button class="dropdown-item status-action" data-status="cancelled" data-id="10">
+                                                    <i class="fas fa-times-circle text-danger me-2"></i> Cancelled
+                                                </button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        
+                            <tr data-booking-status="confirmed" data-booking-id="11">
+                                <td>
+                                    <span class="text-accent fw-bold small">TRV-9E0F1A2B</span>
+                                </td>
+                                <td>
+                                    <p class="mb-0 fw-semibold">Paris Romance</p>
+                                    <p class="mb-0 small text-white-50">FRANCE</p>
+                                </td>
+                                <td>
+                                    <p class="mb-0 small">Sarah Mitchell</p>
+                                    <p class="mb-0 small text-white-50">sarah@example.com</p>
+                                </td>
+                                <td class="small">Feb 18, 2027</td>
+                                <td class="small text-center">2</td>
+                                <td class="text-accent fw-bold">$4,200</td>
+                                <td>
+                                    <span class="status-badge status-confirmed" data-status-badge>
+                                        Confirmed
+                                    </span>
+                                </td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button class="btn status-dropdown-btn dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                            <i class="fas fa-cog me-1"></i> Change
+                                        </button>
+                                        <ul class="dropdown-menu status-dropdown-menu">
+                                            <li>
+                                                <button class="dropdown-item status-action" data-status="pending" data-id="11">
+                                                    <i class="fas fa-clock text-warning me-2"></i> Pending
+                                                </button>
+                                            </li>
+                                            <li>
+                                                <button class="dropdown-item status-action" data-status="confirmed" data-id="11">
+                                                    <i class="fas fa-check-circle text-accent me-2"></i> Confirmed
+                                                </button>
+                                            </li>
+                                            <li>
+                                                <button class="dropdown-item status-action" data-status="cancelled" data-id="11">
+                                                    <i class="fas fa-times-circle text-danger me-2"></i> Cancelled
+                                                </button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        
+                            <tr data-booking-status="pending" data-booking-id="9">
+                                <td>
+                                    <span class="text-accent fw-bold small">TRV-1C2D3E4F</span>
+                                </td>
+                                <td>
+                                    <p class="mb-0 fw-semibold">Fjord Lands</p>
+                                    <p class="mb-0 small text-white-50">NORWAY</p>
+                                </td>
+                                <td>
+                                    <p class="mb-0 small">Omar Farouk</p>
+                                    <p class="mb-0 small text-white-50">omar@example.com</p>
+                                </td>
+                                <td class="small">Dec 05, 2026</td>
+                                <td class="small text-center">5</td>
+                                <td class="text-accent fw-bold">$11,000</td>
+                                <td>
+                                    <span class="status-badge status-pending" data-status-badge>
+                                        Pending
+                                    </span>
+                                </td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button class="btn status-dropdown-btn dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                            <i class="fas fa-cog me-1"></i> Change
+                                        </button>
+                                        <ul class="dropdown-menu status-dropdown-menu">
+                                            <li>
+                                                <button class="dropdown-item status-action" data-status="pending" data-id="9">
+                                                    <i class="fas fa-clock text-warning me-2"></i> Pending
+                                                </button>
+                                            </li>
+                                            <li>
+                                                <button class="dropdown-item status-action" data-status="confirmed" data-id="9">
+                                                    <i class="fas fa-check-circle text-accent me-2"></i> Confirmed
+                                                </button>
+                                            </li>
+                                            <li>
+                                                <button class="dropdown-item status-action" data-status="cancelled" data-id="9">
+                                                    <i class="fas fa-times-circle text-danger me-2"></i> Cancelled
+                                                </button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        
+                            <tr data-booking-status="confirmed" data-booking-id="8">
+                                <td>
+                                    <span class="text-accent fw-bold small">TRV-7E8F9A0B</span>
+                                </td>
+                                <td>
+                                    <p class="mb-0 fw-semibold">Alpine Peaks</p>
+                                    <p class="mb-0 small text-white-50">SWITZERLAND</p>
+                                </td>
+                                <td>
+                                    <p class="mb-0 small">Emily Johnson</p>
+                                    <p class="mb-0 small text-white-50">emily@example.com</p>
+                                </td>
+                                <td class="small">Jan 19, 2027</td>
+                                <td class="small text-center">1</td>
+                                <td class="text-accent fw-bold">$1,650</td>
+                                <td>
+                                    <span class="status-badge status-confirmed" data-status-badge>
+                                        Confirmed
+                                    </span>
+                                </td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button class="btn status-dropdown-btn dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                            <i class="fas fa-cog me-1"></i> Change
+                                        </button>
+                                        <ul class="dropdown-menu status-dropdown-menu">
+                                            <li>
+                                                <button class="dropdown-item status-action" data-status="pending" data-id="8">
+                                                    <i class="fas fa-clock text-warning me-2"></i> Pending
+                                                </button>
+                                            </li>
+                                            <li>
+                                                <button class="dropdown-item status-action" data-status="confirmed" data-id="8">
+                                                    <i class="fas fa-check-circle text-accent me-2"></i> Confirmed
+                                                </button>
+                                            </li>
+                                            <li>
+                                                <button class="dropdown-item status-action" data-status="cancelled" data-id="8">
+                                                    <i class="fas fa-times-circle text-danger me-2"></i> Cancelled
+                                                </button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        
+                            <tr data-booking-status="pending" data-booking-id="2">
+                                <td>
+                                    <span class="text-accent fw-bold small">TRV-E5F6A7B8</span>
+                                </td>
+                                <td>
+                                    <p class="mb-0 fw-semibold">Northern Lights</p>
+                                    <p class="mb-0 small text-white-50">ICELAND</p>
+                                </td>
+                                <td>
+                                    <p class="mb-0 small">Demo User</p>
+                                    <p class="mb-0 small text-white-50">user@travora.com</p>
+                                </td>
+                                <td class="small">Jan 04, 2027</td>
+                                <td class="small text-center">2</td>
+                                <td class="text-accent fw-bold">$4,800</td>
+                                <td>
+                                    <span class="status-badge status-pending" data-status-badge>
+                                        Pending
+                                    </span>
+                                </td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button class="btn status-dropdown-btn dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                            <i class="fas fa-cog me-1"></i> Change
+                                        </button>
+                                        <ul class="dropdown-menu status-dropdown-menu">
+                                            <li>
+                                                <button class="dropdown-item status-action" data-status="pending" data-id="2">
+                                                    <i class="fas fa-clock text-warning me-2"></i> Pending
+                                                </button>
+                                            </li>
+                                            <li>
+                                                <button class="dropdown-item status-action" data-status="confirmed" data-id="2">
+                                                    <i class="fas fa-check-circle text-accent me-2"></i> Confirmed
+                                                </button>
+                                            </li>
+                                            <li>
+                                                <button class="dropdown-item status-action" data-status="cancelled" data-id="2">
+                                                    <i class="fas fa-times-circle text-danger me-2"></i> Cancelled
+                                                </button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        
+                            <tr data-booking-status="cancelled" data-booking-id="7">
+                                <td>
+                                    <span class="text-accent fw-bold small">TRV-3A4B5C6D</span>
+                                </td>
+                                <td>
+                                    <p class="mb-0 fw-semibold">Machu Picchu</p>
+                                    <p class="mb-0 small text-white-50">PERU</p>
+                                </td>
+                                <td>
+                                    <p class="mb-0 small">Carlos Ruiz</p>
+                                    <p class="mb-0 small text-white-50">carlos@example.com</p>
+                                </td>
+                                <td class="small">Nov 18, 2026</td>
+                                <td class="small text-center">2</td>
+                                <td class="text-accent fw-bold">$2,800</td>
+                                <td>
+                                    <span class="status-badge status-cancelled" data-status-badge>
+                                        Cancelled
+                                    </span>
+                                </td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button class="btn status-dropdown-btn dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                            <i class="fas fa-cog me-1"></i> Change
+                                        </button>
+                                        <ul class="dropdown-menu status-dropdown-menu">
+                                            <li>
+                                                <button class="dropdown-item status-action" data-status="pending" data-id="7">
+                                                    <i class="fas fa-clock text-warning me-2"></i> Pending
+                                                </button>
+                                            </li>
+                                            <li>
+                                                <button class="dropdown-item status-action" data-status="confirmed" data-id="7">
+                                                    <i class="fas fa-check-circle text-accent me-2"></i> Confirmed
+                                                </button>
+                                            </li>
+                                            <li>
+                                                <button class="dropdown-item status-action" data-status="cancelled" data-id="7">
+                                                    <i class="fas fa-times-circle text-danger me-2"></i> Cancelled
+                                                </button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        
+                            <tr data-booking-status="pending" data-booking-id="6">
+                                <td>
+                                    <span class="text-accent fw-bold small">TRV-9C0D1E2F</span>
+                                </td>
+                                <td>
+                                    <p class="mb-0 fw-semibold">Sahara Dunes</p>
+                                    <p class="mb-0 small text-white-50">MOROCCO</p>
+                                </td>
+                                <td>
+                                    <p class="mb-0 small">Yuki Tanaka</p>
+                                    <p class="mb-0 small text-white-50">yuki@example.com</p>
+                                </td>
+                                <td class="small">Nov 25, 2026</td>
+                                <td class="small text-center">2</td>
+                                <td class="text-accent fw-bold">$1,900</td>
+                                <td>
+                                    <span class="status-badge status-pending" data-status-badge>
+                                        Pending
+                                    </span>
+                                </td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button class="btn status-dropdown-btn dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                            <i class="fas fa-cog me-1"></i> Change
+                                        </button>
+                                        <ul class="dropdown-menu status-dropdown-menu">
+                                            <li>
+                                                <button class="dropdown-item status-action" data-status="pending" data-id="6">
+                                                    <i class="fas fa-clock text-warning me-2"></i> Pending
+                                                </button>
+                                            </li>
+                                            <li>
+                                                <button class="dropdown-item status-action" data-status="confirmed" data-id="6">
+                                                    <i class="fas fa-check-circle text-accent me-2"></i> Confirmed
+                                                </button>
+                                            </li>
+                                            <li>
+                                                <button class="dropdown-item status-action" data-status="cancelled" data-id="6">
+                                                    <i class="fas fa-times-circle text-danger me-2"></i> Cancelled
+                                                </button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        
+                            <tr data-booking-status="confirmed" data-booking-id="5">
+                                <td>
+                                    <span class="text-accent fw-bold small">TRV-5E6F7A8B</span>
+                                </td>
+                                <td>
+                                    <p class="mb-0 fw-semibold">Coral Atolls</p>
+                                    <p class="mb-0 small text-white-50">MALDIVES</p>
+                                </td>
+                                <td>
+                                    <p class="mb-0 small">Ahmed Khan</p>
+                                    <p class="mb-0 small text-white-50">ahmed@example.com</p>
+                                </td>
+                                <td class="small">Dec 22, 2026</td>
+                                <td class="small text-center">3</td>
+                                <td class="text-accent fw-bold">$6,300</td>
+                                <td>
+                                    <span class="status-badge status-confirmed" data-status-badge>
+                                        Confirmed
+                                    </span>
+                                </td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button class="btn status-dropdown-btn dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                            <i class="fas fa-cog me-1"></i> Change
+                                        </button>
+                                        <ul class="dropdown-menu status-dropdown-menu">
+                                            <li>
+                                                <button class="dropdown-item status-action" data-status="pending" data-id="5">
+                                                    <i class="fas fa-clock text-warning me-2"></i> Pending
+                                                </button>
+                                            </li>
+                                            <li>
+                                                <button class="dropdown-item status-action" data-status="confirmed" data-id="5">
+                                                    <i class="fas fa-check-circle text-accent me-2"></i> Confirmed
+                                                </button>
+                                            </li>
+                                            <li>
+                                                <button class="dropdown-item status-action" data-status="cancelled" data-id="5">
+                                                    <i class="fas fa-times-circle text-danger me-2"></i> Cancelled
+                                                </button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        
+                            <tr data-booking-status="confirmed" data-booking-id="4">
+                                <td>
+                                    <span class="text-accent fw-bold small">TRV-1A2B3C4D</span>
+                                </td>
+                                <td>
+                                    <p class="mb-0 fw-semibold">Kyoto Gardens</p>
+                                    <p class="mb-0 small text-white-50">JAPAN</p>
+                                </td>
+                                <td>
+                                    <p class="mb-0 small">Sarah Mitchell</p>
+                                    <p class="mb-0 small text-white-50">sarah@example.com</p>
+                                </td>
+                                <td class="small">Dec 10, 2026</td>
+                                <td class="small text-center">1</td>
+                                <td class="text-accent fw-bold">$1,800</td>
+                                <td>
+                                    <span class="status-badge status-confirmed" data-status-badge>
+                                        Confirmed
+                                    </span>
+                                </td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button class="btn status-dropdown-btn dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                            <i class="fas fa-cog me-1"></i> Change
+                                        </button>
+                                        <ul class="dropdown-menu status-dropdown-menu">
+                                            <li>
+                                                <button class="dropdown-item status-action" data-status="pending" data-id="4">
+                                                    <i class="fas fa-clock text-warning me-2"></i> Pending
+                                                </button>
+                                            </li>
+                                            <li>
+                                                <button class="dropdown-item status-action" data-status="confirmed" data-id="4">
+                                                    <i class="fas fa-check-circle text-accent me-2"></i> Confirmed
+                                                </button>
+                                            </li>
+                                            <li>
+                                                <button class="dropdown-item status-action" data-status="cancelled" data-id="4">
+                                                    <i class="fas fa-times-circle text-danger me-2"></i> Cancelled
+                                                </button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        
+                            <tr data-booking-status="confirmed" data-booking-id="1">
+                                <td>
+                                    <span class="text-accent fw-bold small">TRV-A1B2C3D4</span>
+                                </td>
+                                <td>
+                                    <p class="mb-0 fw-semibold">Amalfi Coast</p>
+                                    <p class="mb-0 small text-white-50">ITALY</p>
+                                </td>
+                                <td>
+                                    <p class="mb-0 small">Demo User</p>
+                                    <p class="mb-0 small text-white-50">user@travora.com</p>
+                                </td>
+                                <td class="small">Nov 30, 2026</td>
+                                <td class="small text-center">2</td>
+                                <td class="text-accent fw-bold">$2,400</td>
+                                <td>
+                                    <span class="status-badge status-confirmed" data-status-badge>
+                                        Confirmed
+                                    </span>
+                                </td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button class="btn status-dropdown-btn dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                            <i class="fas fa-cog me-1"></i> Change
+                                        </button>
+                                        <ul class="dropdown-menu status-dropdown-menu">
+                                            <li>
+                                                <button class="dropdown-item status-action" data-status="pending" data-id="1">
+                                                    <i class="fas fa-clock text-warning me-2"></i> Pending
+                                                </button>
+                                            </li>
+                                            <li>
+                                                <button class="dropdown-item status-action" data-status="confirmed" data-id="1">
+                                                    <i class="fas fa-check-circle text-accent me-2"></i> Confirmed
+                                                </button>
+                                            </li>
+                                            <li>
+                                                <button class="dropdown-item status-action" data-status="cancelled" data-id="1">
+                                                    <i class="fas fa-times-circle text-danger me-2"></i> Cancelled
+                                                </button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="mt-4">
+                
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="travora-footer py-5 mt-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <h5 class="travora-logo mb-2">TRAVORA</h5>
+                <p class="text-muted small mb-0">Your next journey starts here.</p>
+            </div>
+            <div class="col-md-6 text-md-end mt-3 mt-md-0">
+                <p class="text-muted small mb-0">© 2026 Travora — Edition</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="../js/travora-data.js"></script>
+    <script src="../js/travora-static.js"></script>
+    <script src="../js/main.js"></script>
+    
+    
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+    const csrf = document.querySelector('meta[name="csrf-token"]')?.content;
+
+    // ===== STATUS CHANGE =====
+    document.querySelectorAll('.status-action').forEach(btn => {
+        btn.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            const bookingId = this.getAttribute('data-id');
+            const newStatus = this.getAttribute('data-status');
+            const row = document.querySelector(`tr[data-booking-id="${bookingId}"]`);
+
+            if (!row) return;
+
+            // Disable button while processing
+            const dropdownBtn = row.querySelector('.status-dropdown-btn');
+            if (dropdownBtn) {
+                dropdownBtn.disabled = true;
+                dropdownBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i> ...';
+            }
+
+            fetch(`/admin/bookings/${bookingId}/status`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': csrf,
+                    'Accept': 'application/json',
+                },
+                body: JSON.stringify({ status: newStatus })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (!data.success) throw new Error('Update failed');
+
+                // Update badge
+                const badge = row.querySelector('[data-status-badge]');
+                if (badge) {
+                    badge.classList.remove('status-pending', 'status-confirmed', 'status-cancelled');
+                    badge.classList.add('status-' + data.status);
+                    badge.textContent = data.status.charAt(0).toUpperCase() + data.status.slice(1);
+                }
+
+                // Update row data attribute
+                row.setAttribute('data-booking-status', data.status);
+
+                // Flash row
+                row.classList.remove('status-flash');
+                void row.offsetWidth; // trigger reflow
+                row.classList.add('status-flash');
+
+                // Restore button
+                if (dropdownBtn) {
+                    dropdownBtn.disabled = false;
+                    dropdownBtn.innerHTML = '<i class="fas fa-cog me-1"></i> Change';
+                }
+
+                // Show toast
+                showStatusToast(data.message, data.status);
+            })
+            .catch(err => {
+                console.error('Status update error:', err);
+                if (dropdownBtn) {
+                    dropdownBtn.disabled = false;
+                    dropdownBtn.innerHTML = '<i class="fas fa-cog me-1"></i> Change';
+                }
+                alert('Failed to update status. Please try again.');
+            });
+        });
+    });
+
+    // ===== TOAST =====
+    function showStatusToast(message, status) {
+        const existing = document.querySelector('.travora-toast');
+        if (existing) existing.remove();
+
+        const iconMap = {
+            'pending': 'fa-clock',
+            'confirmed': 'fa-check-circle',
+            'cancelled': 'fa-times-circle'
+        };
+        const colorMap = {
+            'pending': '#FFD700',
+            'confirmed': '#40E0D0',
+            'cancelled': '#ff4757'
+        };
+
+        const toast = document.createElement('div');
+        toast.className = 'travora-toast';
+        toast.style.borderColor = colorMap[status] || '#40E0D0';
+        toast.innerHTML = `
+            <i class="fas ${iconMap[status] || 'fa-info-circle'}" style="color:${colorMap[status] || '#40E0D0'}"></i>
+            <span>${message}</span>
+        `;
+        document.body.appendChild(toast);
+
+        setTimeout(() => toast.classList.add('show'), 50);
+        setTimeout(() => {
+            toast.classList.remove('show');
+            setTimeout(() => toast.remove(), 400);
+        }, 2500);
+    }
+
+    // ===== FILTER CHIPS =====
+    const filterChips = document.querySelectorAll('#bookingStatusFilter .filter-chip');
+    filterChips.forEach(chip => {
+        chip.addEventListener('click', function () {
+            filterChips.forEach(c => c.classList.remove('active'));
+            this.classList.add('active');
+
+            const status = this.getAttribute('data-status');
+            document.querySelectorAll('tr[data-booking-status]').forEach(row => {
+                if (status === 'all' || row.getAttribute('data-booking-status') === status) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+    });
+
+});
+</script>
+
+</body>
+</html>

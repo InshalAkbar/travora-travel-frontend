@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="static-token">
+    <title>Admin Dashboard — Travora</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    
+    
+</head>
+<body class="bg-dark-custom text-white">
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <!-- Navbar -->
+    <span data-nav-role="customer" style="display:contents">
+
+<nav class="navbar navbar-expand-lg fixed-top travora-navbar" id="mainNavbar">
+    <div class="container-fluid px-4 px-md-5">
+        <a class="navbar-brand travora-logo" href="../index.html">TRAVORA</a>
+
+        <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+            <i class="fas fa-bars text-white"></i>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-end" id="navMenu">
+            <ul class="navbar-nav align-items-lg-center gap-lg-4 me-lg-4 mb-3 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link travora-link " 
+                       href="../explore.html">Explore</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link travora-link " 
+                       href="../planner.html">Planner</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link travora-link " 
+                       href="../guides.html">Guides</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link travora-link ai-planner-link " 
+                       href="../ai-assistant.html">
+                        <i class="fas fa-wand-magic-sparkles"></i> AI Assistant
+                        <span class="ai-badge">NEW</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link travora-link favorites-link " 
+                       href="../favorites.html">
+                        <i class="fas fa-heart me-1"></i> Favorites
+                        <span class="favorites-count " id="navFavCount">3</span>
+                    </a>
+                </li>
+            </ul>
+
+            <span data-auth="user" hidden style="display:contents">
+                
+                <div class="dropdown">
+                    <button class="btn user-menu-btn dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                        <div class="user-avatar-circle">
+                            D
+                        </div>
+                        <span class="user-name">Demo User</span>
+                        
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end user-dropdown">
+                        
+                        <li>
+                            <a class="dropdown-item" href="../profile.html">
+                                <i class="fas fa-user me-2"></i> My Profile
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="../favorites.html">
+                                <i class="fas fa-heart me-2"></i> My Favorites
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <form data-static="1" data-action="logout" data-method="POST">
+                                
+                                <button type="submit" class="dropdown-item text-danger">
+                                    <i class="fas fa-sign-out-alt me-2"></i> Logout
+                                </button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </span><span data-auth="guest" style="display:contents">
+                
+                <a href="../login.html" class="btn nav-login-btn">Login</a>
+            </span>
+        </div>
+    </div>
+</nav></span><span data-nav-role="admin" style="display:contents" hidden>
+
+<nav class="navbar navbar-expand-lg fixed-top travora-navbar" id="mainNavbar">
+    <div class="container-fluid px-4 px-md-5">
+        <a class="navbar-brand travora-logo" href="../index.html">TRAVORA</a>
+
+        <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+            <i class="fas fa-bars text-white"></i>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-end" id="navMenu">
+            <ul class="navbar-nav align-items-lg-center gap-lg-4 me-lg-4 mb-3 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link travora-link " 
+                       href="../explore.html">Explore</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link travora-link " 
+                       href="../planner.html">Planner</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link travora-link " 
+                       href="../guides.html">Guides</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link travora-link ai-planner-link " 
+                       href="../ai-assistant.html">
+                        <i class="fas fa-wand-magic-sparkles"></i> AI Assistant
+                        <span class="ai-badge">NEW</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link travora-link favorites-link " 
+                       href="../favorites.html">
+                        <i class="fas fa-heart me-1"></i> Favorites
+                        <span class="favorites-count " id="navFavCount">3</span>
+                    </a>
+                </li>
+            </ul>
+
+            <span data-auth="user" hidden style="display:contents">
+                
+                <div class="dropdown">
+                    <button class="btn user-menu-btn dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                        <div class="user-avatar-circle">
+                            T
+                        </div>
+                        <span class="user-name">Travora Admin</span>
+                        
+                            <span class="admin-badge">ADMIN</span>
+                        
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end user-dropdown">
+                        
+                            <li>
+                                <a class="dropdown-item" href="../admin/dashboard.html">
+                                    <i class="fas fa-tachometer-alt me-2"></i> Dashboard
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="../admin/users.html">
+                                    <i class="fas fa-users me-2"></i> Users
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="../admin/bookings.html">
+                                    <i class="fas fa-suitcase me-2"></i> Bookings
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="../admin/ai-chats.html">
+                                    <i class="fas fa-comments me-2"></i> AI Chats
+                                </a>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                        
+                        <li>
+                            <a class="dropdown-item" href="../profile.html">
+                                <i class="fas fa-user me-2"></i> My Profile
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="../favorites.html">
+                                <i class="fas fa-heart me-2"></i> My Favorites
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <form data-static="1" data-action="logout" data-method="POST">
+                                
+                                <button type="submit" class="dropdown-item text-danger">
+                                    <i class="fas fa-sign-out-alt me-2"></i> Logout
+                                </button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </span><span data-auth="guest" style="display:contents">
+                
+                <a href="../login.html" class="btn nav-login-btn">Login</a>
+            </span>
+        </div>
+    </div>
+</nav></span>
+
+    <!-- Main Content -->
+    <main>
+        
+
+<section class="admin-section">
+    <div class="container-fluid px-4 px-md-5">
+
+        <!-- Header -->
+        <div class="admin-header mb-5">
+            <div>
+                <p class="travora-subtitle mb-2">ADMIN CONTROL</p>
+                <h1 class="font-syne fw-bold display-4 mb-2">Dashboard</h1>
+                <p class="text-white-50 mb-0">Welcome back, Travora Admin!</p>
+            </div>
+            <div class="admin-header-actions">
+                <a href="../admin/ai-chats.html" class="btn travora-btn-outline">
+                    <i class="fas fa-comments me-2"></i> AI Chats
+                </a>
+                <a href="../admin/users.html" class="btn travora-btn-outline">
+                    <i class="fas fa-users me-2"></i> Users
+                </a>
+                <a href="../admin/bookings.html" class="btn travora-btn-primary magnetic-btn">
+                    <i class="fas fa-suitcase me-2"></i> Bookings
+                </a>
+            </div>
+        </div>
+
+        
+
+        <!-- Stats Cards -->
+        <div class="row g-4 mb-5">
+            <div class="col-lg-3 col-md-6">
+                <div class="stat-card glass-card rounded-4 p-4">
+                    <div class="stat-icon-wrap" style="background: rgba(64, 224, 208, 0.15); color: #40E0D0;">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <p class="stat-label">Total Users</p>
+                    <h3 class="stat-value">8</h3>
+                    <p class="stat-change">
+                        <i class="fas fa-arrow-up"></i> 2 today
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <div class="stat-card glass-card rounded-4 p-4">
+                    <div class="stat-icon-wrap" style="background: rgba(255, 71, 87, 0.15); color: #ff4757;">
+                        <i class="fas fa-suitcase"></i>
+                    </div>
+                    <p class="stat-label">Total Bookings</p>
+                    <h3 class="stat-value">12</h3>
+                    <p class="stat-change">6 pending</p>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <div class="stat-card glass-card rounded-4 p-4">
+                    <div class="stat-icon-wrap" style="background: rgba(255, 215, 0, 0.15); color: #FFD700;">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <p class="stat-label">Total Revenue</p>
+                    <h3 class="stat-value">$50,850</h3>
+                    <p class="stat-change">All time</p>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <div class="stat-card glass-card rounded-4 p-4">
+                    <div class="stat-icon-wrap" style="background: rgba(64, 224, 208, 0.15); color: #40E0D0;">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <p class="stat-label">AI Chats</p>
+                    <h3 class="stat-value">8</h3>
+                    <p class="stat-change">total messages</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <!-- Chart -->
+            <div class="col-lg-8">
+                <div class="glass-card rounded-4 p-4 h-100">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h4 class="font-syne fw-bold h5 mb-0">Bookings — Last 7 Days</h4>
+                        <span class="badge-soft small">Live</span>
+                    </div>
+                    <div class="chart-bars">
+                        
+                        
+                            <div class="chart-bar-wrap">
+                                <div class="chart-bar" style="height: 33.3333333333%">
+                                    <span class="chart-bar-value">1</span>
+                                </div>
+                                <p class="chart-bar-label">Oct 15</p>
+                            </div>
+                        
+                            <div class="chart-bar-wrap">
+                                <div class="chart-bar" style="height: 33.3333333333%">
+                                    <span class="chart-bar-value">1</span>
+                                </div>
+                                <p class="chart-bar-label">Oct 16</p>
+                            </div>
+                        
+                            <div class="chart-bar-wrap">
+                                <div class="chart-bar" style="height: 33.3333333333%">
+                                    <span class="chart-bar-value">1</span>
+                                </div>
+                                <p class="chart-bar-label">Oct 17</p>
+                            </div>
+                        
+                            <div class="chart-bar-wrap">
+                                <div class="chart-bar" style="height: 66.6666666667%">
+                                    <span class="chart-bar-value">2</span>
+                                </div>
+                                <p class="chart-bar-label">Oct 18</p>
+                            </div>
+                        
+                            <div class="chart-bar-wrap">
+                                <div class="chart-bar" style="height: 33.3333333333%">
+                                    <span class="chart-bar-value">1</span>
+                                </div>
+                                <p class="chart-bar-label">Oct 19</p>
+                            </div>
+                        
+                            <div class="chart-bar-wrap">
+                                <div class="chart-bar" style="height: 66.6666666667%">
+                                    <span class="chart-bar-value">2</span>
+                                </div>
+                                <p class="chart-bar-label">Oct 20</p>
+                            </div>
+                        
+                            <div class="chart-bar-wrap">
+                                <div class="chart-bar" style="height: 100%">
+                                    <span class="chart-bar-value">3</span>
+                                </div>
+                                <p class="chart-bar-label">Oct 21</p>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Users -->
+            <div class="col-lg-4">
+                <div class="glass-card rounded-4 p-4 h-100">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h4 class="font-syne fw-bold h5 mb-0">Recent Users</h4>
+                        <a href="../admin/users.html" class="text-accent small text-decoration-none">View all</a>
+                    </div>
+                    
+                        <div class="admin-list-item">
+                            <div class="user-avatar-sm">L</div>
+                            <div class="flex-grow-1">
+                                <p class="mb-0 small fw-semibold">Lena Fischer</p>
+                                <p class="mb-0 small text-white-50">lena@example.com</p>
+                            </div>
+                            <span class="small text-white-50">6 hours ago</span>
+                        </div>
+                    
+                        <div class="admin-list-item">
+                            <div class="user-avatar-sm">O</div>
+                            <div class="flex-grow-1">
+                                <p class="mb-0 small fw-semibold">Omar Farouk</p>
+                                <p class="mb-0 small text-white-50">omar@example.com</p>
+                            </div>
+                            <span class="small text-white-50">2 days ago</span>
+                        </div>
+                    
+                        <div class="admin-list-item">
+                            <div class="user-avatar-sm">E</div>
+                            <div class="flex-grow-1">
+                                <p class="mb-0 small fw-semibold">Emily Johnson</p>
+                                <p class="mb-0 small text-white-50">emily@example.com</p>
+                            </div>
+                            <span class="small text-white-50">9 days ago</span>
+                        </div>
+                    
+                        <div class="admin-list-item">
+                            <div class="user-avatar-sm">C</div>
+                            <div class="flex-grow-1">
+                                <p class="mb-0 small fw-semibold">Carlos Ruiz</p>
+                                <p class="mb-0 small text-white-50">carlos@example.com</p>
+                            </div>
+                            <span class="small text-white-50">21 days ago</span>
+                        </div>
+                    
+                        <div class="admin-list-item">
+                            <div class="user-avatar-sm">Y</div>
+                            <div class="flex-grow-1">
+                                <p class="mb-0 small fw-semibold">Yuki Tanaka</p>
+                                <p class="mb-0 small text-white-50">yuki@example.com</p>
+                            </div>
+                            <span class="small text-white-50">1 month ago</span>
+                        </div>
+                    
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Bookings + AI Chats -->
+        <div class="row g-4 mt-4">
+            <div class="col-lg-6">
+                <div class="glass-card rounded-4 p-4 h-100">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h4 class="font-syne fw-bold h5 mb-0">Recent Bookings</h4>
+                        <a href="../admin/bookings.html" class="text-accent small text-decoration-none">View all</a>
+                    </div>
+                    
+                        <div class="admin-list-item">
+                            <div class="stat-icon-wrap" style="width: 36px; height: 36px; font-size: 0.85rem;">
+                                <i class="fas fa-plane"></i>
+                            </div>
+                            <div class="flex-grow-1">
+                                <p class="mb-0 small fw-semibold">Santorini</p>
+                                <p class="mb-0 small text-white-50">Emily Johnson • TRV-3C4D5E6F</p>
+                            </div>
+                            <span class="small text-accent fw-bold">$7,000</span>
+                        </div>
+                    
+                        <div class="admin-list-item">
+                            <div class="stat-icon-wrap" style="width: 36px; height: 36px; font-size: 0.85rem;">
+                                <i class="fas fa-plane"></i>
+                            </div>
+                            <div class="flex-grow-1">
+                                <p class="mb-0 small fw-semibold">Phi Phi Islands</p>
+                                <p class="mb-0 small text-white-50">Demo User • TRV-C9D0E1F2</p>
+                            </div>
+                            <span class="small text-accent fw-bold">$3,200</span>
+                        </div>
+                    
+                        <div class="admin-list-item">
+                            <div class="stat-icon-wrap" style="width: 36px; height: 36px; font-size: 0.85rem;">
+                                <i class="fas fa-plane"></i>
+                            </div>
+                            <div class="flex-grow-1">
+                                <p class="mb-0 small fw-semibold">Tokyo Lights</p>
+                                <p class="mb-0 small text-white-50">Lena Fischer • TRV-5A6B7C8D</p>
+                            </div>
+                            <span class="small text-accent fw-bold">$3,800</span>
+                        </div>
+                    
+                        <div class="admin-list-item">
+                            <div class="stat-icon-wrap" style="width: 36px; height: 36px; font-size: 0.85rem;">
+                                <i class="fas fa-plane"></i>
+                            </div>
+                            <div class="flex-grow-1">
+                                <p class="mb-0 small fw-semibold">Paris Romance</p>
+                                <p class="mb-0 small text-white-50">Sarah Mitchell • TRV-9E0F1A2B</p>
+                            </div>
+                            <span class="small text-accent fw-bold">$4,200</span>
+                        </div>
+                    
+                        <div class="admin-list-item">
+                            <div class="stat-icon-wrap" style="width: 36px; height: 36px; font-size: 0.85rem;">
+                                <i class="fas fa-plane"></i>
+                            </div>
+                            <div class="flex-grow-1">
+                                <p class="mb-0 small fw-semibold">Fjord Lands</p>
+                                <p class="mb-0 small text-white-50">Omar Farouk • TRV-1C2D3E4F</p>
+                            </div>
+                            <span class="small text-accent fw-bold">$11,000</span>
+                        </div>
+                    
+                </div>
+            </div>
+
+            <!-- Recent AI Chats (NEW) -->
+            <div class="col-lg-6">
+                <div class="glass-card rounded-4 p-4 h-100">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h4 class="font-syne fw-bold h5 mb-0">Recent AI Chats</h4>
+                        <a href="../admin/ai-chats.html" class="text-accent small text-decoration-none">View all</a>
+                    </div>
+                    
+                        <div class="admin-list-item">
+                            <div class="user-avatar-sm">
+                                E
+                            </div>
+                            <div class="flex-grow-1">
+                                <p class="mb-0 small fw-semibold">Where to stay in Paris</p>
+                                <p class="mb-0 small text-white-50">
+                                    Emily Johnson • 6 hours ago
+                                </p>
+                            </div>
+                            <span class="badge-soft small">hotel</span>
+                        </div>
+                    
+                        <div class="admin-list-item">
+                            <div class="user-avatar-sm">
+                                G
+                            </div>
+                            <div class="flex-grow-1">
+                                <p class="mb-0 small fw-semibold">Cheap flights tips</p>
+                                <p class="mb-0 small text-white-50">
+                                    Guest • 7 hours ago
+                                </p>
+                            </div>
+                            <span class="badge-soft small">flights</span>
+                        </div>
+                    
+                        <div class="admin-list-item">
+                            <div class="user-avatar-sm">
+                                D
+                            </div>
+                            <div class="flex-grow-1">
+                                <p class="mb-0 small fw-semibold">Budget for $3000 trip</p>
+                                <p class="mb-0 small text-white-50">
+                                    Demo User • 1 day ago
+                                </p>
+                            </div>
+                            <span class="badge-soft small">budget</span>
+                        </div>
+                    
+                        <div class="admin-list-item">
+                            <div class="user-avatar-sm">
+                                G
+                            </div>
+                            <div class="flex-grow-1">
+                                <p class="mb-0 small fw-semibold">Best food in Italy</p>
+                                <p class="mb-0 small text-white-50">
+                                    Guest • 1 day ago
+                                </p>
+                            </div>
+                            <span class="badge-soft small">food</span>
+                        </div>
+                    
+                        <div class="admin-list-item">
+                            <div class="user-avatar-sm">
+                                A
+                            </div>
+                            <div class="flex-grow-1">
+                                <p class="mb-0 small fw-semibold">Plan 7 days in Turkey</p>
+                                <p class="mb-0 small text-white-50">
+                                    Ahmed Khan • 1 day ago
+                                </p>
+                            </div>
+                            <span class="badge-soft small">itinerary</span>
+                        </div>
+                    
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Activities -->
+        <div class="row g-4 mt-4">
+            <div class="col-12">
+                <div class="glass-card rounded-4 p-4">
+                    <h4 class="font-syne fw-bold h5 mb-4">Recent Activity</h4>
+                    <div class="activity-feed">
+                        
+                            <div class="activity-item">
+                                <div class="activity-dot"></div>
+                                <div class="flex-grow-1">
+                                    <p class="mb-0 small">
+                                        <strong>Demo User</strong>
+                                        <span class="text-white-50">Booked Phi Phi Islands for 4 travelers</span>
+                                    </p>
+                                    <p class="mb-0 small text-white-50" style="font-size: 0.75rem;">
+                                        4 hours ago
+                                    </p>
+                                </div>
+                            </div>
+                        
+                            <div class="activity-item">
+                                <div class="activity-dot"></div>
+                                <div class="flex-grow-1">
+                                    <p class="mb-0 small">
+                                        <strong>Demo User</strong>
+                                        <span class="text-white-50">User logged in successfully</span>
+                                    </p>
+                                    <p class="mb-0 small text-white-50" style="font-size: 0.75rem;">
+                                        5 hours ago
+                                    </p>
+                                </div>
+                            </div>
+                        
+                            <div class="activity-item">
+                                <div class="activity-dot"></div>
+                                <div class="flex-grow-1">
+                                    <p class="mb-0 small">
+                                        <strong>Lena Fischer</strong>
+                                        <span class="text-white-50">New account registered</span>
+                                    </p>
+                                    <p class="mb-0 small text-white-50" style="font-size: 0.75rem;">
+                                        6 hours ago
+                                    </p>
+                                </div>
+                            </div>
+                        
+                            <div class="activity-item">
+                                <div class="activity-dot"></div>
+                                <div class="flex-grow-1">
+                                    <p class="mb-0 small">
+                                        <strong>Sarah Mitchell</strong>
+                                        <span class="text-white-50">User logged in successfully</span>
+                                    </p>
+                                    <p class="mb-0 small text-white-50" style="font-size: 0.75rem;">
+                                        8 hours ago
+                                    </p>
+                                </div>
+                            </div>
+                        
+                            <div class="activity-item">
+                                <div class="activity-dot"></div>
+                                <div class="flex-grow-1">
+                                    <p class="mb-0 small">
+                                        <strong>Emily Johnson</strong>
+                                        <span class="text-white-50">User logged in successfully</span>
+                                    </p>
+                                    <p class="mb-0 small text-white-50" style="font-size: 0.75rem;">
+                                        20 hours ago
+                                    </p>
+                                </div>
+                            </div>
+                        
+                            <div class="activity-item">
+                                <div class="activity-dot"></div>
+                                <div class="flex-grow-1">
+                                    <p class="mb-0 small">
+                                        <strong>Demo User</strong>
+                                        <span class="text-white-50">Added Amalfi Coast to favorites</span>
+                                    </p>
+                                    <p class="mb-0 small text-white-50" style="font-size: 0.75rem;">
+                                        1 day ago
+                                    </p>
+                                </div>
+                            </div>
+                        
+                            <div class="activity-item">
+                                <div class="activity-dot"></div>
+                                <div class="flex-grow-1">
+                                    <p class="mb-0 small">
+                                        <strong>Demo User</strong>
+                                        <span class="text-white-50">Asked the AI assistant about Iceland</span>
+                                    </p>
+                                    <p class="mb-0 small text-white-50" style="font-size: 0.75rem;">
+                                        2 days ago
+                                    </p>
+                                </div>
+                            </div>
+                        
+                            <div class="activity-item">
+                                <div class="activity-dot"></div>
+                                <div class="flex-grow-1">
+                                    <p class="mb-0 small">
+                                        <strong>Ahmed Khan</strong>
+                                        <span class="text-white-50">New account registered</span>
+                                    </p>
+                                    <p class="mb-0 small text-white-50" style="font-size: 0.75rem;">
+                                        2 days ago
+                                    </p>
+                                </div>
+                            </div>
+                        
+                            <div class="activity-item">
+                                <div class="activity-dot"></div>
+                                <div class="flex-grow-1">
+                                    <p class="mb-0 small">
+                                        <strong>Omar Farouk</strong>
+                                        <span class="text-white-50">New account registered</span>
+                                    </p>
+                                    <p class="mb-0 small text-white-50" style="font-size: 0.75rem;">
+                                        2 days ago
+                                    </p>
+                                </div>
+                            </div>
+                        
+                            <div class="activity-item">
+                                <div class="activity-dot"></div>
+                                <div class="flex-grow-1">
+                                    <p class="mb-0 small">
+                                        <strong>Demo User</strong>
+                                        <span class="text-white-50">Booked Northern Lights for 2 travelers</span>
+                                    </p>
+                                    <p class="mb-0 small text-white-50" style="font-size: 0.75rem;">
+                                        3 days ago
+                                    </p>
+                                </div>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="travora-footer py-5 mt-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <h5 class="travora-logo mb-2">TRAVORA</h5>
+                <p class="text-muted small mb-0">Your next journey starts here.</p>
+            </div>
+            <div class="col-md-6 text-md-end mt-3 mt-md-0">
+                <p class="text-muted small mb-0">© 2026 Travora — Edition</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="../js/travora-data.js"></script>
+    <script src="../js/travora-static.js"></script>
+    <script src="../js/main.js"></script>
+    
+    
+</body>
+</html>

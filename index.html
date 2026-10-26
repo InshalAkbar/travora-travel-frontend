@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="static-token">
+    <title>Travora — Explore Beyond</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    
+</head>
+<body class="bg-dark-custom text-white">
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <!-- Navbar -->
+    <span data-nav-role="customer" style="display:contents">
+
+<nav class="navbar navbar-expand-lg fixed-top travora-navbar" id="mainNavbar">
+    <div class="container-fluid px-4 px-md-5">
+        <a class="navbar-brand travora-logo" href="index.html">TRAVORA</a>
+
+        <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+            <i class="fas fa-bars text-white"></i>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-end" id="navMenu">
+            <ul class="navbar-nav align-items-lg-center gap-lg-4 me-lg-4 mb-3 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link travora-link " 
+                       href="explore.html">Explore</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link travora-link " 
+                       href="planner.html">Planner</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link travora-link " 
+                       href="guides.html">Guides</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link travora-link ai-planner-link " 
+                       href="ai-assistant.html">
+                        <i class="fas fa-wand-magic-sparkles"></i> AI Assistant
+                        <span class="ai-badge">NEW</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link travora-link favorites-link " 
+                       href="favorites.html">
+                        <i class="fas fa-heart me-1"></i> Favorites
+                        <span class="favorites-count " id="navFavCount">3</span>
+                    </a>
+                </li>
+            </ul>
+
+            <span data-auth="user" hidden style="display:contents">
+                
+                <div class="dropdown">
+                    <button class="btn user-menu-btn dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                        <div class="user-avatar-circle">
+                            D
+                        </div>
+                        <span class="user-name">Demo User</span>
+                        
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end user-dropdown">
+                        
+                        <li>
+                            <a class="dropdown-item" href="profile.html">
+                                <i class="fas fa-user me-2"></i> My Profile
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="favorites.html">
+                                <i class="fas fa-heart me-2"></i> My Favorites
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <form data-static="1" data-action="logout" data-method="POST">
+                                
+                                <button type="submit" class="dropdown-item text-danger">
+                                    <i class="fas fa-sign-out-alt me-2"></i> Logout
+                                </button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </span><span data-auth="guest" style="display:contents">
+                
+                <a href="login.html" class="btn nav-login-btn">Login</a>
+            </span>
+        </div>
+    </div>
+</nav></span><span data-nav-role="admin" style="display:contents" hidden>
+
+<nav class="navbar navbar-expand-lg fixed-top travora-navbar" id="mainNavbar">
+    <div class="container-fluid px-4 px-md-5">
+        <a class="navbar-brand travora-logo" href="index.html">TRAVORA</a>
+
+        <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+            <i class="fas fa-bars text-white"></i>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-end" id="navMenu">
+            <ul class="navbar-nav align-items-lg-center gap-lg-4 me-lg-4 mb-3 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link travora-link " 
+                       href="explore.html">Explore</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link travora-link " 
+                       href="planner.html">Planner</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link travora-link " 
+                       href="guides.html">Guides</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link travora-link ai-planner-link " 
+                       href="ai-assistant.html">
+                        <i class="fas fa-wand-magic-sparkles"></i> AI Assistant
+                        <span class="ai-badge">NEW</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link travora-link favorites-link " 
+                       href="favorites.html">
+                        <i class="fas fa-heart me-1"></i> Favorites
+                        <span class="favorites-count " id="navFavCount">3</span>
+                    </a>
+                </li>
+            </ul>
+
+            <span data-auth="user" hidden style="display:contents">
+                
+                <div class="dropdown">
+                    <button class="btn user-menu-btn dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                        <div class="user-avatar-circle">
+                            T
+                        </div>
+                        <span class="user-name">Travora Admin</span>
+                        
+                            <span class="admin-badge">ADMIN</span>
+                        
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end user-dropdown">
+                        
+                            <li>
+                                <a class="dropdown-item" href="admin/dashboard.html">
+                                    <i class="fas fa-tachometer-alt me-2"></i> Dashboard
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="admin/users.html">
+                                    <i class="fas fa-users me-2"></i> Users
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="admin/bookings.html">
+                                    <i class="fas fa-suitcase me-2"></i> Bookings
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="admin/ai-chats.html">
+                                    <i class="fas fa-comments me-2"></i> AI Chats
+                                </a>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                        
+                        <li>
+                            <a class="dropdown-item" href="profile.html">
+                                <i class="fas fa-user me-2"></i> My Profile
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="favorites.html">
+                                <i class="fas fa-heart me-2"></i> My Favorites
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <form data-static="1" data-action="logout" data-method="POST">
+                                
+                                <button type="submit" class="dropdown-item text-danger">
+                                    <i class="fas fa-sign-out-alt me-2"></i> Logout
+                                </button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </span><span data-auth="guest" style="display:contents">
+                
+                <a href="login.html" class="btn nav-login-btn">Login</a>
+            </span>
+        </div>
+    </div>
+</nav></span>
+
+    <!-- Main Content -->
+    <main>
+        
+
+<!-- ============ HERO SECTION ============ -->
+<section class="hero-section position-relative overflow-hidden" id="hero">
+    
+    <div class="hero-bg parallax-layer" data-speed="0.05">
+        <img src="https://images.unsplash.com/photo-1533105079780-92b9be482077?q=80&w=2000&auto=format&fit=crop" 
+             alt="Background" class="w-100 h-100 object-fit-cover opacity-40">
+        <div class="hero-overlay"></div>
+    </div>
+
+    <div class="container-fluid px-4 px-md-5 position-relative" style="z-index: 10;">
+        <div class="row align-items-center min-vh-100">
+            
+            <!-- LEFT: Text -->
+            <div class="col-lg-7 parallax-layer hero-content-wrapper" data-speed="0.02">
+                <p class="travora-subtitle mb-4">YOUR NEXT JOURNEY STARTS HERE</p>
+                
+                <h1 class="hero-title font-syne mb-4">
+                    <span class="d-block text-white">GO</span>
+                    <span class="d-block text-outline">BEYOND</span>
+                    <span class="d-block text-white position-relative">
+                        ORDINARY
+                        <span class="accent-square"></span>
+                    </span>
+                </h1>
+                
+                <p class="hero-desc mb-5">
+                    Discover places that feel unreal. Build journeys around what matters to you, and experience travel differently.
+                </p>
+                
+                <div class="d-flex flex-wrap gap-3">
+                    <a href="explore.html" class="btn travora-btn-primary magnetic-btn">
+                        Explore destinations <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                    <a href="ai-assistant.html" class="btn travora-btn-outline magnetic-btn">
+                        <i class="fas fa-wand-magic-sparkles me-2 text-accent"></i> Ask Travora AI
+                    </a>
+                </div>
+            </div>
+
+            <!-- RIGHT: Featured Card -->
+            <div class="col-lg-4 offset-lg-1 mt-5 mt-lg-0 parallax-layer" data-speed="0.08">
+                
+
+<div class="glass-card p-3 p-md-4 rounded-4 position-relative overflow-hidden h-100 destination-card">
+    
+    <!-- Heart Button -->
+    <button class="favorite-btn active" 
+            data-id="1"
+            title="Remove from favorites">
+        <i class="fas fa-heart"></i>
+    </button>
+
+    <!-- Card Image (Clickable) -->
+    <a href="destination-1.html" class="text-decoration-none">
+        <div class="card-image-wrapper position-relative rounded-3 overflow-hidden mb-4">
+            <img src="https://images.unsplash.com/photo-1533105079780-92b9be482077?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" 
+                 alt="Amalfi Coast" 
+                 class="w-100 h-100 object-fit-cover card-image">
+            
+            <div class="badge-featured">FEATURED ESCAPE</div>
+            <div class="badge-number">01</div>
+            
+            <!-- Rating Badge -->
+            <div class="badge-rating">
+                <i class="fas fa-star"></i> 4.9
+            </div>
+        </div>
+    </a>
+    
+    <!-- Card Details -->
+    <div class="d-flex justify-content-between align-items-end">
+        <div>
+            <p class="text-accent small mb-1 letter-spacing">ITALY</p>
+            <a href="destination-1.html" class="text-decoration-none">
+                <h3 class="font-syne fw-bold h4 mb-2 card-title">Amalfi Coast</h3>
+            </a>
+            <p class="card-meta mb-0">
+                <i class="far fa-clock me-1"></i> 5 Days
+                <span class="mx-2">•</span>
+                $1,200
+            </p>
+        </div>
+        <a href="destination-1.html" class="btn arrow-btn rounded-circle">
+            <i class="fas fa-arrow-right"></i>
+        </a>
+    </div>
+    
+</div>
+            </div>
+            
+        </div>
+    </div>
+
+    <div class="scroll-indicator d-none d-md-block">
+        <p class="small mb-2 letter-spacing text-white-50">SCROLL TO EXPLORE</p>
+        <i class="fas fa-arrow-down text-accent animate-bounce"></i>
+    </div>
+
+    <div class="edition-badge d-none d-md-block">
+        <p class="small mb-0 text-white-50">2026</p>
+        <p class="small fw-bold mb-0 letter-spacing">EDITION</p>
+    </div>
+
+</section>
+
+<!-- ============ CATEGORIES SECTION ============ -->
+<section class="section-padding">
+    <div class="container-fluid px-4 px-md-5">
+        <div class="d-flex justify-content-between align-items-end mb-5">
+            <div>
+                <p class="travora-subtitle mb-2">BROWSE BY VIBE</p>
+                <h2 class="font-syne fw-bold display-5">Find Your Kind of Place</h2>
+            </div>
+            <a href="explore.html" class="text-accent text-decoration-none d-none d-md-block">
+                All categories <i class="fas fa-arrow-right ms-1"></i>
+            </a>
+        </div>
+
+        <div class="row g-3">
+            
+                <div class="col-md-6 col-lg-4">
+                    <a href="category-beaches.html" class="category-card d-block position-relative rounded-4 overflow-hidden text-decoration-none">
+    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&amp;w=800&amp;auto=format&amp;fit=crop" 
+         alt="Beaches" 
+         class="category-image w-100 h-100 object-fit-cover">
+    
+    <div class="category-overlay"></div>
+    
+    <div class="category-content position-absolute bottom-0 start-0 p-4 w-100">
+        <div class="d-flex align-items-center gap-3 mb-2">
+            <div class="category-icon">
+                <i class="fas fa-umbrella-beach"></i>
+            </div>
+            <div>
+                <h4 class="font-syne fw-bold mb-0 text-white">Beaches</h4>
+                <p class="category-count mb-0">124 destinations</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="category-arrow">
+        <i class="fas fa-arrow-up-right-from-square"></i>
+    </div>
+</a>
+                </div>
+            
+                <div class="col-md-6 col-lg-4">
+                    <a href="category-mountains.html" class="category-card d-block position-relative rounded-4 overflow-hidden text-decoration-none">
+    <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&amp;w=800&amp;auto=format&amp;fit=crop" 
+         alt="Mountains" 
+         class="category-image w-100 h-100 object-fit-cover">
+    
+    <div class="category-overlay"></div>
+    
+    <div class="category-content position-absolute bottom-0 start-0 p-4 w-100">
+        <div class="d-flex align-items-center gap-3 mb-2">
+            <div class="category-icon">
+                <i class="fas fa-mountain"></i>
+            </div>
+            <div>
+                <h4 class="font-syne fw-bold mb-0 text-white">Mountains</h4>
+                <p class="category-count mb-0">87 destinations</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="category-arrow">
+        <i class="fas fa-arrow-up-right-from-square"></i>
+    </div>
+</a>
+                </div>
+            
+                <div class="col-md-6 col-lg-4">
+                    <a href="category-cities.html" class="category-card d-block position-relative rounded-4 overflow-hidden text-decoration-none">
+    <img src="https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?q=80&amp;w=800&amp;auto=format&amp;fit=crop" 
+         alt="Cities" 
+         class="category-image w-100 h-100 object-fit-cover">
+    
+    <div class="category-overlay"></div>
+    
+    <div class="category-content position-absolute bottom-0 start-0 p-4 w-100">
+        <div class="d-flex align-items-center gap-3 mb-2">
+            <div class="category-icon">
+                <i class="fas fa-city"></i>
+            </div>
+            <div>
+                <h4 class="font-syne fw-bold mb-0 text-white">Cities</h4>
+                <p class="category-count mb-0">203 destinations</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="category-arrow">
+        <i class="fas fa-arrow-up-right-from-square"></i>
+    </div>
+</a>
+                </div>
+            
+                <div class="col-md-6 col-lg-4">
+                    <a href="category-deserts.html" class="category-card d-block position-relative rounded-4 overflow-hidden text-decoration-none">
+    <img src="https://images.unsplash.com/photo-1509316785289-025f5b846b35?q=80&amp;w=800&amp;auto=format&amp;fit=crop" 
+         alt="Deserts" 
+         class="category-image w-100 h-100 object-fit-cover">
+    
+    <div class="category-overlay"></div>
+    
+    <div class="category-content position-absolute bottom-0 start-0 p-4 w-100">
+        <div class="d-flex align-items-center gap-3 mb-2">
+            <div class="category-icon">
+                <i class="fas fa-sun"></i>
+            </div>
+            <div>
+                <h4 class="font-syne fw-bold mb-0 text-white">Deserts</h4>
+                <p class="category-count mb-0">42 destinations</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="category-arrow">
+        <i class="fas fa-arrow-up-right-from-square"></i>
+    </div>
+</a>
+                </div>
+            
+                <div class="col-md-6 col-lg-4">
+                    <a href="category-forests.html" class="category-card d-block position-relative rounded-4 overflow-hidden text-decoration-none">
+    <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&amp;w=800&amp;auto=format&amp;fit=crop" 
+         alt="Forests" 
+         class="category-image w-100 h-100 object-fit-cover">
+    
+    <div class="category-overlay"></div>
+    
+    <div class="category-content position-absolute bottom-0 start-0 p-4 w-100">
+        <div class="d-flex align-items-center gap-3 mb-2">
+            <div class="category-icon">
+                <i class="fas fa-tree"></i>
+            </div>
+            <div>
+                <h4 class="font-syne fw-bold mb-0 text-white">Forests</h4>
+                <p class="category-count mb-0">65 destinations</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="category-arrow">
+        <i class="fas fa-arrow-up-right-from-square"></i>
+    </div>
+</a>
+                </div>
+            
+                <div class="col-md-6 col-lg-4">
+                    <a href="category-islands.html" class="category-card d-block position-relative rounded-4 overflow-hidden text-decoration-none">
+    <img src="https://images.unsplash.com/photo-1559128010-7c1ad6e1b6a5?q=80&amp;w=800&amp;auto=format&amp;fit=crop" 
+         alt="Islands" 
+         class="category-image w-100 h-100 object-fit-cover">
+    
+    <div class="category-overlay"></div>
+    
+    <div class="category-content position-absolute bottom-0 start-0 p-4 w-100">
+        <div class="d-flex align-items-center gap-3 mb-2">
+            <div class="category-icon">
+                <i class="fas fa-water"></i>
+            </div>
+            <div>
+                <h4 class="font-syne fw-bold mb-0 text-white">Islands</h4>
+                <p class="category-count mb-0">98 destinations</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="category-arrow">
+        <i class="fas fa-arrow-up-right-from-square"></i>
+    </div>
+</a>
+                </div>
+            
+        </div>
+    </div>
+</section>
+
+<!-- ============ FEATURED DESTINATIONS ============ -->
+<section class="section-padding">
+    <div class="container-fluid px-4 px-md-5">
+        <div class="d-flex justify-content-between align-items-end mb-5">
+            <div>
+                <p class="travora-subtitle mb-2">CURATED FOR YOU</p>
+                <h2 class="font-syne fw-bold display-5">Featured Escapes</h2>
+            </div>
+            <a href="explore.html" class="text-accent text-decoration-none d-none d-md-block">
+                View all <i class="fas fa-arrow-right ms-1"></i>
+            </a>
+        </div>
+
+        <div class="row g-4">
+            
+                <div class="col-md-6 col-lg-4">
+                    
+
+<div class="glass-card p-3 p-md-4 rounded-4 position-relative overflow-hidden h-100 destination-card">
+    
+    <!-- Heart Button -->
+    <button class="favorite-btn active" 
+            data-id="1"
+            title="Remove from favorites">
+        <i class="fas fa-heart"></i>
+    </button>
+
+    <!-- Card Image (Clickable) -->
+    <a href="destination-1.html" class="text-decoration-none">
+        <div class="card-image-wrapper position-relative rounded-3 overflow-hidden mb-4">
+            <img src="https://images.unsplash.com/photo-1533105079780-92b9be482077?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" 
+                 alt="Amalfi Coast" 
+                 class="w-100 h-100 object-fit-cover card-image">
+            
+            <div class="badge-featured">FEATURED ESCAPE</div>
+            <div class="badge-number">01</div>
+            
+            <!-- Rating Badge -->
+            <div class="badge-rating">
+                <i class="fas fa-star"></i> 4.9
+            </div>
+        </div>
+    </a>
+    
+    <!-- Card Details -->
+    <div class="d-flex justify-content-between align-items-end">
+        <div>
+            <p class="text-accent small mb-1 letter-spacing">ITALY</p>
+            <a href="destination-1.html" class="text-decoration-none">
+                <h3 class="font-syne fw-bold h4 mb-2 card-title">Amalfi Coast</h3>
+            </a>
+            <p class="card-meta mb-0">
+                <i class="far fa-clock me-1"></i> 5 Days
+                <span class="mx-2">•</span>
+                $1,200
+            </p>
+        </div>
+        <a href="destination-1.html" class="btn arrow-btn rounded-circle">
+            <i class="fas fa-arrow-right"></i>
+        </a>
+    </div>
+    
+</div>
+                </div>
+            
+                <div class="col-md-6 col-lg-4">
+                    
+
+<div class="glass-card p-3 p-md-4 rounded-4 position-relative overflow-hidden h-100 destination-card">
+    
+    <!-- Heart Button -->
+    <button class="favorite-btn active" 
+            data-id="7"
+            title="Remove from favorites">
+        <i class="fas fa-heart"></i>
+    </button>
+
+    <!-- Card Image (Clickable) -->
+    <a href="destination-7.html" class="text-decoration-none">
+        <div class="card-image-wrapper position-relative rounded-3 overflow-hidden mb-4">
+            <img src="https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" 
+                 alt="Phi Phi Islands" 
+                 class="w-100 h-100 object-fit-cover card-image">
+            
+            <div class="badge-featured">FEATURED ESCAPE</div>
+            <div class="badge-number">02</div>
+            
+            <!-- Rating Badge -->
+            <div class="badge-rating">
+                <i class="fas fa-star"></i> 4.8
+            </div>
+        </div>
+    </a>
+    
+    <!-- Card Details -->
+    <div class="d-flex justify-content-between align-items-end">
+        <div>
+            <p class="text-accent small mb-1 letter-spacing">THAILAND</p>
+            <a href="destination-7.html" class="text-decoration-none">
+                <h3 class="font-syne fw-bold h4 mb-2 card-title">Phi Phi Islands</h3>
+            </a>
+            <p class="card-meta mb-0">
+                <i class="far fa-clock me-1"></i> 5 Days
+                <span class="mx-2">•</span>
+                $800
+            </p>
+        </div>
+        <a href="destination-7.html" class="btn arrow-btn rounded-circle">
+            <i class="fas fa-arrow-right"></i>
+        </a>
+    </div>
+    
+</div>
+                </div>
+            
+                <div class="col-md-6 col-lg-4">
+                    
+
+<div class="glass-card p-3 p-md-4 rounded-4 position-relative overflow-hidden h-100 destination-card">
+    
+    <!-- Heart Button -->
+    <button class="favorite-btn active" 
+            data-id="3"
+            title="Remove from favorites">
+        <i class="fas fa-heart"></i>
+    </button>
+
+    <!-- Card Image (Clickable) -->
+    <a href="destination-3.html" class="text-decoration-none">
+        <div class="card-image-wrapper position-relative rounded-3 overflow-hidden mb-4">
+            <img src="https://images.unsplash.com/photo-1531366936337-7c912a4589a7?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" 
+                 alt="Northern Lights" 
+                 class="w-100 h-100 object-fit-cover card-image">
+            
+            <div class="badge-featured">FEATURED ESCAPE</div>
+            <div class="badge-number">03</div>
+            
+            <!-- Rating Badge -->
+            <div class="badge-rating">
+                <i class="fas fa-star"></i> 5.0
+            </div>
+        </div>
+    </a>
+    
+    <!-- Card Details -->
+    <div class="d-flex justify-content-between align-items-end">
+        <div>
+            <p class="text-accent small mb-1 letter-spacing">ICELAND</p>
+            <a href="destination-3.html" class="text-decoration-none">
+                <h3 class="font-syne fw-bold h4 mb-2 card-title">Northern Lights</h3>
+            </a>
+            <p class="card-meta mb-0">
+                <i class="far fa-clock me-1"></i> 6 Days
+                <span class="mx-2">•</span>
+                $2,400
+            </p>
+        </div>
+        <a href="destination-3.html" class="btn arrow-btn rounded-circle">
+            <i class="fas fa-arrow-right"></i>
+        </a>
+    </div>
+    
+</div>
+                </div>
+            
+        </div>
+    </div>
+</section>
+
+<!-- ============ WHY TRAVORA (FEATURES) ============ -->
+<section class="section-padding features-section position-relative">
+    <div class="container-fluid px-4 px-md-5">
+        <div class="text-center mb-5">
+            <p class="travora-subtitle mb-2">WHY TRAVORA</p>
+            <h2 class="font-syne fw-bold display-5 mb-3">Travel Smarter, Not Harder</h2>
+            <p class="section-desc mx-auto">
+                We combine cutting-edge AI with human-curated experiences to make every journey unforgettable.
+            </p>
+        </div>
+
+        <div class="row g-4">
+            
+                <div class="col-md-6 col-lg-3">
+                    <div class="feature-card glass-card p-4 rounded-4 h-100">
+                        <div class="feature-icon mb-4">
+                            <i class="fas fa-wand-magic-sparkles"></i>
+                        </div>
+                        <h4 class="font-syne fw-bold h5 mb-3">AI Trip Planner</h4>
+                        <p class="feature-desc mb-0">Let our intelligent AI craft a personalized itinerary based on your interests, budget, and time.</p>
+                    </div>
+                </div>
+            
+                <div class="col-md-6 col-lg-3">
+                    <div class="feature-card glass-card p-4 rounded-4 h-100">
+                        <div class="feature-icon mb-4">
+                            <i class="fas fa-map-location-dot"></i>
+                        </div>
+                        <h4 class="font-syne fw-bold h5 mb-3">Curated Destinations</h4>
+                        <p class="feature-desc mb-0">Handpicked locations from around the world that go beyond the ordinary tourist trail.</p>
+                    </div>
+                </div>
+            
+                <div class="col-md-6 col-lg-3">
+                    <div class="feature-card glass-card p-4 rounded-4 h-100">
+                        <div class="feature-icon mb-4">
+                            <i class="fas fa-wallet"></i>
+                        </div>
+                        <h4 class="font-syne fw-bold h5 mb-3">Smart Budgeting</h4>
+                        <p class="feature-desc mb-0">Real-time cost estimates, currency conversion, and budget tracking for every trip.</p>
+                    </div>
+                </div>
+            
+                <div class="col-md-6 col-lg-3">
+                    <div class="feature-card glass-card p-4 rounded-4 h-100">
+                        <div class="feature-icon mb-4">
+                            <i class="fas fa-shield-heart"></i>
+                        </div>
+                        <h4 class="font-syne fw-bold h5 mb-3">Trusted Guides</h4>
+                        <p class="feature-desc mb-0">Verified local guides and insider tips to make your journey safe and unforgettable.</p>
+                    </div>
+                </div>
+            
+        </div>
+    </div>
+</section>
+
+<!-- ============ TESTIMONIALS ============ -->
+<section class="section-padding">
+    <div class="container-fluid px-4 px-md-5">
+        <div class="text-center mb-5">
+            <p class="travora-subtitle mb-2">TRAVELER STORIES</p>
+            <h2 class="font-syne fw-bold display-5">Loved by Explorers</h2>
+        </div>
+
+        <div class="row g-4">
+            
+                <div class="col-md-6 col-lg-4">
+                    <div class="glass-card p-4 rounded-4 h-100 testimonial-card">
+    
+    <!-- Stars -->
+    <div class="mb-3 text-accent">
+        
+            <i class="fas fa-star"></i>
+        
+            <i class="fas fa-star"></i>
+        
+            <i class="fas fa-star"></i>
+        
+            <i class="fas fa-star"></i>
+        
+            <i class="fas fa-star"></i>
+        
+    </div>
+    
+    <!-- Quote -->
+    <p class="testimonial-text mb-4">
+        "Travora completely changed how I plan my trips. The AI planner suggested hidden gems in Japan I never would have found on my own."
+    </p>
+    
+    <!-- Author -->
+    <div class="d-flex align-items-center gap-3">
+        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&amp;w=200&amp;auto=format&amp;fit=crop" 
+             alt="Sarah Mitchell" 
+             class="testimonial-avatar rounded-circle">
+        <div>
+            <h6 class="fw-bold mb-0 text-white">Sarah Mitchell</h6>
+            <p class="testimonial-location mb-0">London, UK</p>
+        </div>
+    </div>
+    
+</div>
+                </div>
+            
+                <div class="col-md-6 col-lg-4">
+                    <div class="glass-card p-4 rounded-4 h-100 testimonial-card">
+    
+    <!-- Stars -->
+    <div class="mb-3 text-accent">
+        
+            <i class="fas fa-star"></i>
+        
+            <i class="fas fa-star"></i>
+        
+            <i class="fas fa-star"></i>
+        
+            <i class="fas fa-star"></i>
+        
+            <i class="fas fa-star"></i>
+        
+    </div>
+    
+    <!-- Quote -->
+    <p class="testimonial-text mb-4">
+        "The budget calculator is a game changer. I planned a 10-day Europe trip and stayed 20% under my budget!"
+    </p>
+    
+    <!-- Author -->
+    <div class="d-flex align-items-center gap-3">
+        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&amp;w=200&amp;auto=format&amp;fit=crop" 
+             alt="Ahmed Khan" 
+             class="testimonial-avatar rounded-circle">
+        <div>
+            <h6 class="fw-bold mb-0 text-white">Ahmed Khan</h6>
+            <p class="testimonial-location mb-0">Dubai, UAE</p>
+        </div>
+    </div>
+    
+</div>
+                </div>
+            
+                <div class="col-md-6 col-lg-4">
+                    <div class="glass-card p-4 rounded-4 h-100 testimonial-card">
+    
+    <!-- Stars -->
+    <div class="mb-3 text-accent">
+        
+            <i class="fas fa-star"></i>
+        
+            <i class="fas fa-star"></i>
+        
+            <i class="fas fa-star"></i>
+        
+            <i class="fas fa-star"></i>
+        
+            <i class="fas fa-star"></i>
+        
+    </div>
+    
+    <!-- Quote -->
+    <p class="testimonial-text mb-4">
+        "Beautiful interface, but the real magic is in how personal every recommendation feels. Highly recommended!"
+    </p>
+    
+    <!-- Author -->
+    <div class="d-flex align-items-center gap-3">
+        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&amp;w=200&amp;auto=format&amp;fit=crop" 
+             alt="Yuki Tanaka" 
+             class="testimonial-avatar rounded-circle">
+        <div>
+            <h6 class="fw-bold mb-0 text-white">Yuki Tanaka</h6>
+            <p class="testimonial-location mb-0">Tokyo, Japan</p>
+        </div>
+    </div>
+    
+</div>
+                </div>
+            
+        </div>
+    </div>
+</section>
+
+<!-- ============ CTA SECTION (AI PLANNER PROMO) ============ -->
+<section class="section-padding">
+    <div class="container-fluid px-4 px-md-5">
+        <div class="cta-section position-relative rounded-4 overflow-hidden p-5">
+            <div class="cta-bg"></div>
+            
+            <div class="row align-items-center position-relative" style="z-index: 2;">
+                <div class="col-lg-7">
+                    <p class="travora-subtitle mb-3">AI-POWERED PLANNING</p>
+                    <h2 class="font-syne fw-bold display-4 mb-4 text-white">
+                        Let AI Plan Your <br>
+                        Next Adventure
+                    </h2>
+                    <p class="section-desc mb-4" style="max-width: 500px;">
+                        Tell us your interests, budget, and travel dates — our AI will craft a personalized itinerary in seconds.
+                    </p>
+                    <a href="planner.html" class="btn travora-btn-primary magnetic-btn">
+                        <i class="fas fa-magic me-2"></i> Try AI Planner
+                    </a>
+                </div>
+                <div class="col-lg-5 d-none d-lg-block">
+                    <div class="cta-illustration">
+                        <i class="fas fa-route"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="travora-footer py-5 mt-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <h5 class="travora-logo mb-2">TRAVORA</h5>
+                <p class="text-muted small mb-0">Your next journey starts here.</p>
+            </div>
+            <div class="col-md-6 text-md-end mt-3 mt-md-0">
+                <p class="text-muted small mb-0">© 2026 Travora — Edition</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="js/travora-data.js"></script>
+    <script src="js/travora-static.js"></script>
+    <script src="js/main.js"></script>
+    
+    
+</body>
+</html>

@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="static-token">
+    <title>AI Trip Planner — Travora</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    
+</head>
+<body class="bg-dark-custom text-white">
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <!-- Navbar -->
+    <span data-nav-role="customer" style="display:contents">
+
+<nav class="navbar navbar-expand-lg fixed-top travora-navbar" id="mainNavbar">
+    <div class="container-fluid px-4 px-md-5">
+        <a class="navbar-brand travora-logo" href="index.html">TRAVORA</a>
+
+        <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+            <i class="fas fa-bars text-white"></i>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-end" id="navMenu">
+            <ul class="navbar-nav align-items-lg-center gap-lg-4 me-lg-4 mb-3 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link travora-link " 
+                       href="explore.html">Explore</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link travora-link active-link" 
+                       href="planner.html">Planner</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link travora-link " 
+                       href="guides.html">Guides</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link travora-link ai-planner-link " 
+                       href="ai-assistant.html">
+                        <i class="fas fa-wand-magic-sparkles"></i> AI Assistant
+                        <span class="ai-badge">NEW</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link travora-link favorites-link " 
+                       href="favorites.html">
+                        <i class="fas fa-heart me-1"></i> Favorites
+                        <span class="favorites-count " id="navFavCount">3</span>
+                    </a>
+                </li>
+            </ul>
+
+            <span data-auth="user" hidden style="display:contents">
+                
+                <div class="dropdown">
+                    <button class="btn user-menu-btn dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                        <div class="user-avatar-circle">
+                            D
+                        </div>
+                        <span class="user-name">Demo User</span>
+                        
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end user-dropdown">
+                        
+                        <li>
+                            <a class="dropdown-item" href="profile.html">
+                                <i class="fas fa-user me-2"></i> My Profile
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="favorites.html">
+                                <i class="fas fa-heart me-2"></i> My Favorites
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <form data-static="1" data-action="logout" data-method="POST">
+                                
+                                <button type="submit" class="dropdown-item text-danger">
+                                    <i class="fas fa-sign-out-alt me-2"></i> Logout
+                                </button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </span><span data-auth="guest" style="display:contents">
+                
+                <a href="login.html" class="btn nav-login-btn">Login</a>
+            </span>
+        </div>
+    </div>
+</nav></span><span data-nav-role="admin" style="display:contents" hidden>
+
+<nav class="navbar navbar-expand-lg fixed-top travora-navbar" id="mainNavbar">
+    <div class="container-fluid px-4 px-md-5">
+        <a class="navbar-brand travora-logo" href="index.html">TRAVORA</a>
+
+        <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+            <i class="fas fa-bars text-white"></i>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-end" id="navMenu">
+            <ul class="navbar-nav align-items-lg-center gap-lg-4 me-lg-4 mb-3 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link travora-link " 
+                       href="explore.html">Explore</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link travora-link active-link" 
+                       href="planner.html">Planner</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link travora-link " 
+                       href="guides.html">Guides</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link travora-link ai-planner-link " 
+                       href="ai-assistant.html">
+                        <i class="fas fa-wand-magic-sparkles"></i> AI Assistant
+                        <span class="ai-badge">NEW</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link travora-link favorites-link " 
+                       href="favorites.html">
+                        <i class="fas fa-heart me-1"></i> Favorites
+                        <span class="favorites-count " id="navFavCount">3</span>
+                    </a>
+                </li>
+            </ul>
+
+            <span data-auth="user" hidden style="display:contents">
+                
+                <div class="dropdown">
+                    <button class="btn user-menu-btn dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                        <div class="user-avatar-circle">
+                            T
+                        </div>
+                        <span class="user-name">Travora Admin</span>
+                        
+                            <span class="admin-badge">ADMIN</span>
+                        
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end user-dropdown">
+                        
+                            <li>
+                                <a class="dropdown-item" href="admin/dashboard.html">
+                                    <i class="fas fa-tachometer-alt me-2"></i> Dashboard
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="admin/users.html">
+                                    <i class="fas fa-users me-2"></i> Users
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="admin/bookings.html">
+                                    <i class="fas fa-suitcase me-2"></i> Bookings
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="admin/ai-chats.html">
+                                    <i class="fas fa-comments me-2"></i> AI Chats
+                                </a>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                        
+                        <li>
+                            <a class="dropdown-item" href="profile.html">
+                                <i class="fas fa-user me-2"></i> My Profile
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="favorites.html">
+                                <i class="fas fa-heart me-2"></i> My Favorites
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <form data-static="1" data-action="logout" data-method="POST">
+                                
+                                <button type="submit" class="dropdown-item text-danger">
+                                    <i class="fas fa-sign-out-alt me-2"></i> Logout
+                                </button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </span><span data-auth="guest" style="display:contents">
+                
+                <a href="login.html" class="btn nav-login-btn">Login</a>
+            </span>
+        </div>
+    </div>
+</nav></span>
+
+    <!-- Main Content -->
+    <main>
+        
+
+<!-- Page Header -->
+<section class="page-header position-relative overflow-hidden">
+    <div class="page-header-bg">
+        <img src="https://images.unsplash.com/photo-1502920917128-1aa500764cbd?q=80&amp;w=2000&amp;auto=format&amp;fit=crop" 
+             alt="Build Your Perfect Trip" class="w-100 h-100 object-fit-cover">
+        <div class="page-header-overlay"></div>
+    </div>
+
+    <div class="container-fluid px-4 px-md-5 position-relative" style="z-index: 2;">
+        <div class="page-header-content">
+            <p class="travora-subtitle mb-3">AI-POWERED PLANNING</p>
+            <h1 class="font-syne fw-bold display-3 mb-3">Build Your Perfect Trip</h1>
+            
+                <p class="page-header-desc">Tell us your preferences and our AI will craft a personalized itinerary tailored just for you.</p>
+            
+        </div>
+    </div>
+</section>
+
+<!-- Planner Section -->
+<section class="section-padding" id="plannerSection">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                
+                <div class="planner-wrapper glass-card rounded-4 p-4 p-md-5">
+                    
+                    <!-- Progress Bar -->
+                    <div class="planner-progress mb-5">
+                        <div class="progress-steps d-flex justify-content-between position-relative">
+                            <div class="progress-line"></div>
+                            <div class="progress-line-fill" id="progressFill"></div>
+                            
+                            <div class="progress-step active" data-step="1">
+                                <div class="step-circle"><i class="fas fa-map-marker-alt"></i></div>
+                                <p class="step-label">Destination</p>
+                            </div>
+                            <div class="progress-step" data-step="2">
+                                <div class="step-circle"><i class="fas fa-calendar-alt"></i></div>
+                                <p class="step-label">Dates</p>
+                            </div>
+                            <div class="progress-step" data-step="3">
+                                <div class="step-circle"><i class="fas fa-wallet"></i></div>
+                                <p class="step-label">Budget</p>
+                            </div>
+                            <div class="progress-step" data-step="4">
+                                <div class="step-circle"><i class="fas fa-heart"></i></div>
+                                <p class="step-label">Interests</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 1: Destination -->
+                    <div class="planner-step active" data-step="1">
+                        <h3 class="font-syne fw-bold mb-4">Where do you want to go?</h3>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="planner-label">Destination / Region</label>
+                                <input type="text" class="form-control planner-input" placeholder="e.g. Japan, Europe, Anywhere..." id="destinationInput">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="planner-label">Travel Style</label>
+                                <div class="travel-style-grid">
+                                    
+                                        <button type="button" class="style-chip" data-style="solo">
+                                            <i class="fas fa-user"></i>
+                                            <span>Solo</span>
+                                        </button>
+                                    
+                                        <button type="button" class="style-chip" data-style="couple">
+                                            <i class="fas fa-heart"></i>
+                                            <span>Couple</span>
+                                        </button>
+                                    
+                                        <button type="button" class="style-chip" data-style="family">
+                                            <i class="fas fa-users"></i>
+                                            <span>Family</span>
+                                        </button>
+                                    
+                                        <button type="button" class="style-chip" data-style="friends">
+                                            <i class="fas fa-user-group"></i>
+                                            <span>Friends</span>
+                                        </button>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Dates -->
+                    <div class="planner-step" data-step="2">
+                        <h3 class="font-syne fw-bold mb-4">When are you traveling?</h3>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="planner-label">Start Date</label>
+                                <input type="date" class="form-control planner-input" id="startDate">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="planner-label">End Date</label>
+                                <input type="date" class="form-control planner-input" id="endDate">
+                            </div>
+                            <div class="col-12 mt-4">
+                                <label class="planner-label">How many days?</label>
+                                <div class="days-selector d-flex flex-wrap gap-2">
+                                    
+                                        <button type="button" class="day-chip" data-days="3">3 Days</button>
+                                    
+                                        <button type="button" class="day-chip" data-days="5">5 Days</button>
+                                    
+                                        <button type="button" class="day-chip" data-days="7">7 Days</button>
+                                    
+                                        <button type="button" class="day-chip" data-days="10">10 Days</button>
+                                    
+                                        <button type="button" class="day-chip" data-days="14">14 Days</button>
+                                    
+                                        <button type="button" class="day-chip" data-days="21">21 Days</button>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Budget -->
+                    <div class="planner-step" data-step="3">
+                        <h3 class="font-syne fw-bold mb-4">What's your budget?</h3>
+                        <div class="budget-slider-wrapper">
+                            <div class="budget-display text-center mb-4">
+                                <span class="budget-currency">$</span>
+                                <span class="budget-amount" id="budgetAmount">2000</span>
+                                <span class="budget-label">USD per person</span>
+                            </div>
+                            <input type="range" 
+                                   class="budget-slider" 
+                                   min="500" 
+                                   max="10000" 
+                                   step="100" 
+                                   value="2000" 
+                                   id="budgetSlider">
+                            <div class="d-flex justify-content-between mt-2 budget-range-labels">
+                                <span>$500</span>
+                                <span>$10,000+</span>
+                            </div>
+                            
+                            <div class="budget-presets mt-4">
+                                <button type="button" class="preset-chip" data-budget="800">Budget</button>
+                                <button type="button" class="preset-chip active" data-budget="2000">Comfort</button>
+                                <button type="button" class="preset-chip" data-budget="5000">Premium</button>
+                                <button type="button" class="preset-chip" data-budget="8000">Luxury</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 4: Interests -->
+                    <div class="planner-step" data-step="4">
+                        <h3 class="font-syne fw-bold mb-4">What interests you?</h3>
+                        <p class="text-white-50 mb-4">Select as many as you like — we'll build your trip around them.</p>
+                        <div class="interests-grid">
+                            
+                                <button type="button" class="interest-chip" data-interest="adventure">
+                                    <i class="fas fa-hiking"></i>
+                                    <span>Adventure</span>
+                                </button>
+                            
+                                <button type="button" class="interest-chip" data-interest="culture">
+                                    <i class="fas fa-landmark"></i>
+                                    <span>Culture</span>
+                                </button>
+                            
+                                <button type="button" class="interest-chip" data-interest="food">
+                                    <i class="fas fa-utensils"></i>
+                                    <span>Food &amp; Wine</span>
+                                </button>
+                            
+                                <button type="button" class="interest-chip" data-interest="beach">
+                                    <i class="fas fa-umbrella-beach"></i>
+                                    <span>Beach Relax</span>
+                                </button>
+                            
+                                <button type="button" class="interest-chip" data-interest="nature">
+                                    <i class="fas fa-leaf"></i>
+                                    <span>Nature</span>
+                                </button>
+                            
+                                <button type="button" class="interest-chip" data-interest="nightlife">
+                                    <i class="fas fa-music"></i>
+                                    <span>Nightlife</span>
+                                </button>
+                            
+                                <button type="button" class="interest-chip" data-interest="history">
+                                    <i class="fas fa-monument"></i>
+                                    <span>History</span>
+                                </button>
+                            
+                                <button type="button" class="interest-chip" data-interest="shopping">
+                                    <i class="fas fa-bag-shopping"></i>
+                                    <span>Shopping</span>
+                                </button>
+                            
+                                <button type="button" class="interest-chip" data-interest="photography">
+                                    <i class="fas fa-camera"></i>
+                                    <span>Photography</span>
+                                </button>
+                            
+                                <button type="button" class="interest-chip" data-interest="wellness">
+                                    <i class="fas fa-spa"></i>
+                                    <span>Wellness</span>
+                                </button>
+                            
+                        </div>
+                    </div>
+
+                    <!-- Navigation Buttons -->
+                    <div class="planner-nav d-flex justify-content-between mt-5 pt-4 border-top border-secondary">
+                        <button type="button" class="btn travora-btn-outline" id="prevBtn" disabled>
+                            <i class="fas fa-arrow-left me-2"></i> Previous
+                        </button>
+                        <button type="button" class="btn travora-btn-primary magnetic-btn" id="nextBtn">
+                            Next <i class="fas fa-arrow-right ms-2"></i>
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ AI LOADING SECTION ============ -->
+<section class="section-padding d-none" id="loadingSection">
+    <div class="container">
+        <div class="text-center">
+            <div class="ai-loading-animation mx-auto mb-4">
+                <div class="ai-pulse"></div>
+                <i class="fas fa-wand-magic-sparkles"></i>
+            </div>
+            <h3 class="font-syne fw-bold mb-3">AI is crafting your journey...</h3>
+            <p class="text-white-50 mb-0" id="loadingText">Analyzing your preferences</p>
+        </div>
+    </div>
+</section>
+
+<!-- ============ AI RESULT SECTION ============ -->
+<section class="section-padding d-none" id="resultSection">
+    <div class="container">
+        
+        <!-- Result Header -->
+        <div class="text-center mb-5">
+            <p class="travora-subtitle mb-2">YOUR PERSONALIZED TRIP</p>
+            <h2 class="font-syne fw-bold display-5 mb-3">Here's Your AI-Crafted Journey</h2>
+            <p class="text-white-50 mx-auto" style="max-width: 600px;">
+                Powered by <span class="text-accent" id="aiSource">AI</span> — customized just for you
+            </p>
+        </div>
+
+        <div class="row g-5">
+            
+            <!-- LEFT: Itinerary -->
+            <div class="col-lg-8">
+                <div class="itinerary-wrapper" id="itineraryWrapper">
+                    <!-- Dynamically filled by JS -->
+                </div>
+            </div>
+
+            <!-- RIGHT: Trip Summary -->
+            <div class="col-lg-4">
+                <div class="glass-card rounded-4 p-4 position-sticky" style="top: 100px;">
+                    
+                    <h4 class="font-syne fw-bold mb-4">Trip Summary</h4>
+                    
+                    <ul class="trip-summary mb-4">
+                        <li><span>Destination:</span> <strong id="summaryDestination">—</strong></li>
+                        <li><span>Duration:</span> <strong id="summaryDays">—</strong></li>
+                        <li><span>Budget:</span> <strong id="summaryBudget">—</strong></li>
+                        <li><span>Travel Style:</span> <strong id="summaryStyle">—</strong></li>
+                        <li><span>Interests:</span> <strong id="summaryInterests">—</strong></li>
+                    </ul>
+
+                    <h5 class="font-syne fw-bold h6 mb-3">Cost Breakdown</h5>
+                    <div class="cost-breakdown">
+                        <div class="cost-item">
+                            <span>Flights</span>
+                            <strong id="costFlights">$0</strong>
+                        </div>
+                        <div class="cost-item">
+                            <span>Accommodation</span>
+                            <strong id="costStay">$0</strong>
+                        </div>
+                        <div class="cost-item">
+                            <span>Food & Dining</span>
+                            <strong id="costFood">$0</strong>
+                        </div>
+                        <div class="cost-item">
+                            <span>Activities</span>
+                            <strong id="costActivities">$0</strong>
+                        </div>
+                        <div class="cost-item total">
+                            <span>Total</span>
+                            <strong id="costTotal">$0</strong>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="d-grid gap-2 mt-4">
+                        <button type="button" class="btn travora-btn-primary magnetic-btn" id="regenerateBtn">
+                            <i class="fas fa-rotate me-2"></i> Regenerate
+                        </button>
+                        <button type="button" class="btn travora-btn-outline" id="resetPlannerBtn">
+                            <i class="fas fa-redo me-2"></i> Start Over
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="travora-footer py-5 mt-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <h5 class="travora-logo mb-2">TRAVORA</h5>
+                <p class="text-muted small mb-0">Your next journey starts here.</p>
+            </div>
+            <div class="col-md-6 text-md-end mt-3 mt-md-0">
+                <p class="text-muted small mb-0">© 2026 Travora — Edition</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="js/travora-data.js"></script>
+    <script src="js/travora-static.js"></script>
+    <script src="js/main.js"></script>
+    
+    
+<script>
+    // Pass route to JS
+    window.travoraRoutes = window.travoraRoutes || {};
+    window.travoraRoutes.plannerGenerate = "#planner.generate";
+</script>
+
+</body>
+</html>

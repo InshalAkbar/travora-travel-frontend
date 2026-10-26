@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="static-token">
+    <title>Travel Guides — Travora</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    
+</head>
+<body class="bg-dark-custom text-white">
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <!-- Navbar -->
+    <span data-nav-role="customer" style="display:contents">
+
+<nav class="navbar navbar-expand-lg fixed-top travora-navbar" id="mainNavbar">
+    <div class="container-fluid px-4 px-md-5">
+        <a class="navbar-brand travora-logo" href="index.html">TRAVORA</a>
+
+        <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+            <i class="fas fa-bars text-white"></i>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-end" id="navMenu">
+            <ul class="navbar-nav align-items-lg-center gap-lg-4 me-lg-4 mb-3 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link travora-link " 
+                       href="explore.html">Explore</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link travora-link " 
+                       href="planner.html">Planner</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link travora-link active-link" 
+                       href="guides.html">Guides</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link travora-link ai-planner-link " 
+                       href="ai-assistant.html">
+                        <i class="fas fa-wand-magic-sparkles"></i> AI Assistant
+                        <span class="ai-badge">NEW</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link travora-link favorites-link " 
+                       href="favorites.html">
+                        <i class="fas fa-heart me-1"></i> Favorites
+                        <span class="favorites-count " id="navFavCount">3</span>
+                    </a>
+                </li>
+            </ul>
+
+            <span data-auth="user" hidden style="display:contents">
+                
+                <div class="dropdown">
+                    <button class="btn user-menu-btn dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                        <div class="user-avatar-circle">
+                            D
+                        </div>
+                        <span class="user-name">Demo User</span>
+                        
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end user-dropdown">
+                        
+                        <li>
+                            <a class="dropdown-item" href="profile.html">
+                                <i class="fas fa-user me-2"></i> My Profile
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="favorites.html">
+                                <i class="fas fa-heart me-2"></i> My Favorites
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <form data-static="1" data-action="logout" data-method="POST">
+                                
+                                <button type="submit" class="dropdown-item text-danger">
+                                    <i class="fas fa-sign-out-alt me-2"></i> Logout
+                                </button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </span><span data-auth="guest" style="display:contents">
+                
+                <a href="login.html" class="btn nav-login-btn">Login</a>
+            </span>
+        </div>
+    </div>
+</nav></span><span data-nav-role="admin" style="display:contents" hidden>
+
+<nav class="navbar navbar-expand-lg fixed-top travora-navbar" id="mainNavbar">
+    <div class="container-fluid px-4 px-md-5">
+        <a class="navbar-brand travora-logo" href="index.html">TRAVORA</a>
+
+        <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+            <i class="fas fa-bars text-white"></i>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-end" id="navMenu">
+            <ul class="navbar-nav align-items-lg-center gap-lg-4 me-lg-4 mb-3 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link travora-link " 
+                       href="explore.html">Explore</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link travora-link " 
+                       href="planner.html">Planner</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link travora-link active-link" 
+                       href="guides.html">Guides</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link travora-link ai-planner-link " 
+                       href="ai-assistant.html">
+                        <i class="fas fa-wand-magic-sparkles"></i> AI Assistant
+                        <span class="ai-badge">NEW</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link travora-link favorites-link " 
+                       href="favorites.html">
+                        <i class="fas fa-heart me-1"></i> Favorites
+                        <span class="favorites-count " id="navFavCount">3</span>
+                    </a>
+                </li>
+            </ul>
+
+            <span data-auth="user" hidden style="display:contents">
+                
+                <div class="dropdown">
+                    <button class="btn user-menu-btn dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                        <div class="user-avatar-circle">
+                            T
+                        </div>
+                        <span class="user-name">Travora Admin</span>
+                        
+                            <span class="admin-badge">ADMIN</span>
+                        
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end user-dropdown">
+                        
+                            <li>
+                                <a class="dropdown-item" href="admin/dashboard.html">
+                                    <i class="fas fa-tachometer-alt me-2"></i> Dashboard
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="admin/users.html">
+                                    <i class="fas fa-users me-2"></i> Users
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="admin/bookings.html">
+                                    <i class="fas fa-suitcase me-2"></i> Bookings
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="admin/ai-chats.html">
+                                    <i class="fas fa-comments me-2"></i> AI Chats
+                                </a>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                        
+                        <li>
+                            <a class="dropdown-item" href="profile.html">
+                                <i class="fas fa-user me-2"></i> My Profile
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="favorites.html">
+                                <i class="fas fa-heart me-2"></i> My Favorites
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <form data-static="1" data-action="logout" data-method="POST">
+                                
+                                <button type="submit" class="dropdown-item text-danger">
+                                    <i class="fas fa-sign-out-alt me-2"></i> Logout
+                                </button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </span><span data-auth="guest" style="display:contents">
+                
+                <a href="login.html" class="btn nav-login-btn">Login</a>
+            </span>
+        </div>
+    </div>
+</nav></span>
+
+    <!-- Main Content -->
+    <main>
+        
+
+<!-- Page Header -->
+<section class="page-header position-relative overflow-hidden">
+    <div class="page-header-bg">
+        <img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?q=80&amp;w=2000&amp;auto=format&amp;fit=crop" 
+             alt="Travel Guides" class="w-100 h-100 object-fit-cover">
+        <div class="page-header-overlay"></div>
+    </div>
+
+    <div class="container-fluid px-4 px-md-5 position-relative" style="z-index: 2;">
+        <div class="page-header-content">
+            <p class="travora-subtitle mb-3">STORIES &amp; INSIGHTS</p>
+            <h1 class="font-syne fw-bold display-3 mb-3">Travel Guides</h1>
+            
+                <p class="page-header-desc">In-depth guides, personal stories, and insider tips from travelers and locals around the world.</p>
+            
+        </div>
+    </div>
+</section>
+
+<!-- Guides Section -->
+<section class="section-padding">
+    <div class="container-fluid px-4 px-md-5">
+        
+        <!-- Category Filter -->
+        <div class="d-flex flex-wrap gap-2 justify-content-center mb-5" id="guideFilters">
+            
+                <button class="filter-chip active" 
+                        data-category="All">
+                    All
+                </button>
+            
+                <button class="filter-chip " 
+                        data-category="Europe">
+                    Europe
+                </button>
+            
+                <button class="filter-chip " 
+                        data-category="Asia">
+                    Asia
+                </button>
+            
+                <button class="filter-chip " 
+                        data-category="Africa">
+                    Africa
+                </button>
+            
+                <button class="filter-chip " 
+                        data-category="Nordic">
+                    Nordic
+                </button>
+            
+                <button class="filter-chip " 
+                        data-category="Indian Ocean">
+                    Indian Ocean
+                </button>
+            
+                <button class="filter-chip " 
+                        data-category="South America">
+                    South America
+                </button>
+            
+        </div>
+
+        <!-- Featured Guide (First one) -->
+        
+        <div class="featured-guide mb-5">
+            <a href="#" class="featured-guide-link text-decoration-none">
+                <div class="glass-card rounded-4 overflow-hidden featured-guide-card">
+                    <div class="row g-0">
+                        <div class="col-lg-6">
+                            <div class="featured-guide-image">
+                                <img src="https://images.unsplash.com/photo-1533105079780-92b9be482077?q=80&amp;w=1000&amp;auto=format&amp;fit=crop" alt="Ultimate Guide to Amalfi Coast" class="w-100 h-100 object-fit-cover">
+                                <div class="featured-badge">FEATURED</div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 d-flex align-items-center">
+                            <div class="featured-guide-content p-4 p-md-5">
+                                <div class="d-flex gap-3 mb-3">
+                                    <span class="guide-category">Europe</span>
+                                    <span class="guide-read-time"><i class="far fa-clock me-1"></i> 12 min read</span>
+                                </div>
+                                <h2 class="font-syne fw-bold display-5 mb-3">Ultimate Guide to Amalfi Coast</h2>
+                                <p class="guide-excerpt mb-4">Everything you need to know about Italy&#x27;s most iconic coastline — from hidden beaches to cliffside restaurants.</p>
+                                
+                                <div class="d-flex align-items-center gap-3">
+                                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&amp;w=200&amp;auto=format&amp;fit=crop" class="guide-author-avatar rounded-circle" alt="Sarah Mitchell">
+                                    <div>
+                                        <p class="mb-0 fw-semibold">Sarah Mitchell</p>
+                                        <p class="guide-date mb-0">Mar 15, 2026</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Guides Grid -->
+        <div class="row g-4" id="guidesGrid">
+            
+                 
+                
+                <div class="col-md-6 col-lg-4 guide-item" 
+                     data-category="Nordic">
+                    <a href="#" class="guide-card-link text-decoration-none">
+    <div class="glass-card rounded-4 overflow-hidden guide-card h-100">
+        
+        <!-- Image -->
+        <div class="guide-card-image">
+            <img src="https://images.unsplash.com/photo-1531366936337-7c912a4589a7?q=80&amp;w=1000&amp;auto=format&amp;fit=crop" alt="Chasing Northern Lights in Iceland" class="w-100 h-100 object-fit-cover">
+            <div class="guide-card-category">Nordic</div>
+        </div>
+        
+        <!-- Content -->
+        <div class="p-4">
+            <div class="d-flex gap-3 mb-2">
+                <span class="guide-read-time">
+                    <i class="far fa-clock me-1"></i> 9 min read
+                </span>
+            </div>
+            <h3 class="font-syne fw-bold h5 mb-3">Chasing Northern Lights in Iceland</h3>
+            <p class="guide-excerpt mb-4">A complete guide to witnessing the aurora borealis — best months, locations, and photography tips.</p>
+            
+            <div class="d-flex align-items-center gap-3 pt-3 border-top border-secondary">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&amp;w=200&amp;auto=format&amp;fit=crop" class="guide-author-avatar rounded-circle" alt="Ahmed Khan">
+                <div class="flex-grow-1">
+                    <p class="mb-0 fw-semibold small">Ahmed Khan</p>
+                    <p class="guide-date mb-0">Mar 10, 2026</p>
+                </div>
+                <i class="fas fa-arrow-right guide-arrow"></i>
+            </div>
+        </div>
+
+    </div>
+</a>
+                </div>
+            
+                
+                <div class="col-md-6 col-lg-4 guide-item" 
+                     data-category="Asia">
+                    <a href="#" class="guide-card-link text-decoration-none">
+    <div class="glass-card rounded-4 overflow-hidden guide-card h-100">
+        
+        <!-- Image -->
+        <div class="guide-card-image">
+            <img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?q=80&amp;w=1000&amp;auto=format&amp;fit=crop" alt="Kyoto&#x27;s Hidden Temples &amp; Tea Houses" class="w-100 h-100 object-fit-cover">
+            <div class="guide-card-category">Asia</div>
+        </div>
+        
+        <!-- Content -->
+        <div class="p-4">
+            <div class="d-flex gap-3 mb-2">
+                <span class="guide-read-time">
+                    <i class="far fa-clock me-1"></i> 15 min read
+                </span>
+            </div>
+            <h3 class="font-syne fw-bold h5 mb-3">Kyoto&#x27;s Hidden Temples &amp; Tea Houses</h3>
+            <p class="guide-excerpt mb-4">Skip the crowds and discover the quiet side of Japan&#x27;s ancient capital through local secrets.</p>
+            
+            <div class="d-flex align-items-center gap-3 pt-3 border-top border-secondary">
+                <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&amp;w=200&amp;auto=format&amp;fit=crop" class="guide-author-avatar rounded-circle" alt="Yuki Tanaka">
+                <div class="flex-grow-1">
+                    <p class="mb-0 fw-semibold small">Yuki Tanaka</p>
+                    <p class="guide-date mb-0">Mar 5, 2026</p>
+                </div>
+                <i class="fas fa-arrow-right guide-arrow"></i>
+            </div>
+        </div>
+
+    </div>
+</a>
+                </div>
+            
+                
+                <div class="col-md-6 col-lg-4 guide-item" 
+                     data-category="Africa">
+                    <a href="#" class="guide-card-link text-decoration-none">
+    <div class="glass-card rounded-4 overflow-hidden guide-card h-100">
+        
+        <!-- Image -->
+        <div class="guide-card-image">
+            <img src="https://images.unsplash.com/photo-1509316785289-025f5b846b35?q=80&amp;w=1000&amp;auto=format&amp;fit=crop" alt="Sahara Desert: A Night Under the Stars" class="w-100 h-100 object-fit-cover">
+            <div class="guide-card-category">Africa</div>
+        </div>
+        
+        <!-- Content -->
+        <div class="p-4">
+            <div class="d-flex gap-3 mb-2">
+                <span class="guide-read-time">
+                    <i class="far fa-clock me-1"></i> 8 min read
+                </span>
+            </div>
+            <h3 class="font-syne fw-bold h5 mb-3">Sahara Desert: A Night Under the Stars</h3>
+            <p class="guide-excerpt mb-4">What it&#x27;s really like to camp in the world&#x27;s largest hot desert — practical tips and unforgettable m...</p>
+            
+            <div class="d-flex align-items-center gap-3 pt-3 border-top border-secondary">
+                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&amp;w=200&amp;auto=format&amp;fit=crop" class="guide-author-avatar rounded-circle" alt="Sarah Mitchell">
+                <div class="flex-grow-1">
+                    <p class="mb-0 fw-semibold small">Sarah Mitchell</p>
+                    <p class="guide-date mb-0">Feb 28, 2026</p>
+                </div>
+                <i class="fas fa-arrow-right guide-arrow"></i>
+            </div>
+        </div>
+
+    </div>
+</a>
+                </div>
+            
+                
+                <div class="col-md-6 col-lg-4 guide-item" 
+                     data-category="Indian Ocean">
+                    <a href="#" class="guide-card-link text-decoration-none">
+    <div class="glass-card rounded-4 overflow-hidden guide-card h-100">
+        
+        <!-- Image -->
+        <div class="guide-card-image">
+            <img src="https://images.unsplash.com/photo-1559128010-7c1ad6e1b6a5?q=80&amp;w=1000&amp;auto=format&amp;fit=crop" alt="Maldives on a Budget: Yes, It&#x27;s Possible" class="w-100 h-100 object-fit-cover">
+            <div class="guide-card-category">Indian Ocean</div>
+        </div>
+        
+        <!-- Content -->
+        <div class="p-4">
+            <div class="d-flex gap-3 mb-2">
+                <span class="guide-read-time">
+                    <i class="far fa-clock me-1"></i> 10 min read
+                </span>
+            </div>
+            <h3 class="font-syne fw-bold h5 mb-3">Maldives on a Budget: Yes, It&#x27;s Possible</h3>
+            <p class="guide-excerpt mb-4">How to experience paradise without emptying your savings — local islands, guesthouses, and smart pla...</p>
+            
+            <div class="d-flex align-items-center gap-3 pt-3 border-top border-secondary">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&amp;w=200&amp;auto=format&amp;fit=crop" class="guide-author-avatar rounded-circle" alt="Ahmed Khan">
+                <div class="flex-grow-1">
+                    <p class="mb-0 fw-semibold small">Ahmed Khan</p>
+                    <p class="guide-date mb-0">Feb 20, 2026</p>
+                </div>
+                <i class="fas fa-arrow-right guide-arrow"></i>
+            </div>
+        </div>
+
+    </div>
+</a>
+                </div>
+            
+                
+                <div class="col-md-6 col-lg-4 guide-item" 
+                     data-category="South America">
+                    <a href="#" class="guide-card-link text-decoration-none">
+    <div class="glass-card rounded-4 overflow-hidden guide-card h-100">
+        
+        <!-- Image -->
+        <div class="guide-card-image">
+            <img src="https://images.unsplash.com/photo-1526392060635-9d6019884377?q=80&amp;w=1000&amp;auto=format&amp;fit=crop" alt="Trekking to Machu Picchu: All You Need" class="w-100 h-100 object-fit-cover">
+            <div class="guide-card-category">South America</div>
+        </div>
+        
+        <!-- Content -->
+        <div class="p-4">
+            <div class="d-flex gap-3 mb-2">
+                <span class="guide-read-time">
+                    <i class="far fa-clock me-1"></i> 14 min read
+                </span>
+            </div>
+            <h3 class="font-syne fw-bold h5 mb-3">Trekking to Machu Picchu: All You Need</h3>
+            <p class="guide-excerpt mb-4">Inca Trail vs. alternative routes, altitude prep, and what to pack for the adventure of a lifetime.</p>
+            
+            <div class="d-flex align-items-center gap-3 pt-3 border-top border-secondary">
+                <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&amp;w=200&amp;auto=format&amp;fit=crop" class="guide-author-avatar rounded-circle" alt="Yuki Tanaka">
+                <div class="flex-grow-1">
+                    <p class="mb-0 fw-semibold small">Yuki Tanaka</p>
+                    <p class="guide-date mb-0">Feb 15, 2026</p>
+                </div>
+                <i class="fas fa-arrow-right guide-arrow"></i>
+            </div>
+        </div>
+
+    </div>
+</a>
+                </div>
+            
+        </div>
+
+    </div>
+</section>
+
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="travora-footer py-5 mt-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <h5 class="travora-logo mb-2">TRAVORA</h5>
+                <p class="text-muted small mb-0">Your next journey starts here.</p>
+            </div>
+            <div class="col-md-6 text-md-end mt-3 mt-md-0">
+                <p class="text-muted small mb-0">© 2026 Travora — Edition</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="js/travora-data.js"></script>
+    <script src="js/travora-static.js"></script>
+    <script src="js/main.js"></script>
+    
+    
+</body>
+</html>
